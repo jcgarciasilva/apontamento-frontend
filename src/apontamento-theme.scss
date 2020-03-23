@@ -1,0 +1,8 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$apontamento-primary: mat-palette($mat-amber, 700);
+$apontamento-accent: mat-palette($mat-red, 900);
+
+$apontamento-theme: mat-light-theme($apontamento-primary, $apontamento-accent);
+@include angular-material-theme($apontamento-theme);

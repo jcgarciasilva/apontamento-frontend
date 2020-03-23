@@ -10,7 +10,7 @@
           "style": "sass"
         }
       },
-      "root": "",
+      "root": "src",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/apontamento-theme.scss",
+              "src/styles.css"
             ],
             "scripts": []
           },

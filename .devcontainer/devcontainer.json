@@ -11,6 +11,7 @@
     "xaver.clang-format",
     // The following extensions are useful when working on angular.io (i.e. inside the `aio/` directory).
     "angular.ng-template",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "ohnpapa.angular2"
   ]
 }
