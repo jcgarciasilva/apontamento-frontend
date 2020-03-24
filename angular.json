@@ -5,12 +5,8 @@
   "projects": {
     "apontamento": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
-      "root": "src",
+      "schematics": { },
+      "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {

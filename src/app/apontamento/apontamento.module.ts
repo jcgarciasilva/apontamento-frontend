@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ApontamentoRoutingModule } from './apontamento-routing.module';
+import { ApontamentoComponent } from './apontamento.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ApontamentoComponent],
   imports: [
     CommonModule,
-    ApontamentoRoutingModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class ApontamentoModule { }

@@ -12,6 +12,14 @@
     // The following extensions are useful when working on angular.io (i.e. inside the `aio/` directory).
     "angular.ng-template",
     "dbaeumer.vscode-eslint",
-    "ohnpapa.angular2"
+    "ohnpapa.angular2",
+    "alexiv.vscode-angular2-files",
+    "eamodio.gitlens",
+     "angular.ng-template",
+     "esbenp.prettier-vscode",
+     "ms-vscode.vscode-typescript-tslint-plugin",
+     "visualstudioexptteam.vscodeintellicode",
+     
+    
   ]
 }

@@ -1,13 +1,14 @@
-<mat-sidenav-container class="sidenav-container" class="primary">
+<mat-sidenav-container class="sidenav-container" color="primary">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+      [attr.role]="(isHandset$) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$) ? 'over' : 'side'"
+  >
+    <mat-toolbar></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link">Apontamentos</a>
+      <a mat-list-item routerLink="/reports" outerLinkActive="active-link">Relatórios</a>
+      <a mat-list-item houterLink="/cadastro" outerLinkActive="active-link">Cadastros</a>
+      <a mat-list-item houterLink="/user" outerLinkActive="active-link">Usuários</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -17,7 +18,8 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$"
+        >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Apontamento</span>

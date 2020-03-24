@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CadastroComponent } from './cadastro/cadastro/cadastro.component';
+import { ApontamentoComponent } from './apontamento/apontamento.component';
+import { ReportComponent } from './report/report.component';
 
 
 const routes: Routes = [
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#ManagerModule' },
   { path: 'user', component: HomeComponent },
-  { path: 'apontamento', component: HomeComponent },
+  { path: 'apontamento', component: ApontamentoComponent },
+  { path: 'reports', component: ReportComponent },
   { path: '**', component: PageNotFoundComponent }
 
 ];
