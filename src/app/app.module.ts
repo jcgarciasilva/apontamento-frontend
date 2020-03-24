@@ -12,12 +12,14 @@ import { ApontamentoModule } from './apontamento/apontamento.module';
 import { CadastroModule } from './cadastro/cadastro.module';
 import { UserModule } from './user/user.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SideComponent } from './side/side.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SideComponent
   ],
   imports: [
     BrowserModule,

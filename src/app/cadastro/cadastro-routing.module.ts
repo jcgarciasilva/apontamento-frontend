@@ -10,8 +10,6 @@ import { ServiceComponent } from './service/service.component';
 const routes: Routes = [
    {
     path: '', component: CadastroComponent, children: [
-      { path: '', redirectTo: '/cadastro/home', pathMatch: 'full' },
-      { path: 'home', component: CadastroComponent} ,
       { path: 'clients', component: ClientsComponent },
       { path: 'project', component: ProjectsComponent },
       { path: 'service', component: ServiceComponent },
