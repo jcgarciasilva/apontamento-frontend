@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#ManagerModule' },
-  { path: 'user', component: HomeComponent },
+  { path: 'user', component: UserComponent },
   { path: 'apontamento', component: ApontamentoComponent },
   { path: 'reports', component: ReportComponent },
   { path: '**', component: PageNotFoundComponent }

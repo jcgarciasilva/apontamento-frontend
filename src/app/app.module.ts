@@ -16,11 +16,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReportComponent } from './report/report.component';
 import { MenuNavComponent } from './menu-nav/menu-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -31,7 +26,6 @@ import { MatListModule } from '@angular/material/list';
     MenuNavComponent
   ],
   imports: [
-    NgModule,
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
@@ -43,11 +37,6 @@ import { MatListModule } from '@angular/material/list';
     CadastroModule,
     UserModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

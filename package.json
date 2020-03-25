@@ -3,11 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "standardize": "prettier **/*.ts --write",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+   "prettier": {
+    "printWidth": 90,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "parser": "typescript"
   },
   "private": true,
   "dependencies": {

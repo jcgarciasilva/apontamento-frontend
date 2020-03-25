@@ -21,7 +21,7 @@ RUN npm config --global set user root
 # Ideally, the version should be what we use on CI.
 # See `commands > overwrite_yarn` in `.circleci/config.yml`.
 RUN npm install -g @angular/cli
-
+RUN npm i -D prettier
 # Go! (And keep going.)
 CMD ["tail", "--follow", "/dev/null"]
 

@@ -19,7 +19,14 @@
      "esbenp.prettier-vscode",
      "ms-vscode.vscode-typescript-tslint-plugin",
      "visualstudioexptteam.vscodeintellicode",
-     
-    
-  ]
+     "steoates.autoimport",     
+    "johnpapa.angular-essentials",
+    "formulahendry.auto-close-tag",
+    "PeterJausovec.vscode-docker",
+    "WallabyJs.quokka-vscode",
+    "rbbit.typescript-hero",
+    "DSKWRK.vscode-generate-getter-setter",
+
+  ],
+  
 }
