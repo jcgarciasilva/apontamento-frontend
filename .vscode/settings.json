@@ -5,7 +5,7 @@
   "files.autoSave": "onFocusChange",
   "editor.cursorBlinking": "solid",
   "git.enableSmartCommit": true,
-  "editor.autoIndent": true,
+  "editor.autoIndent": "full",
   "debug.openExplorerOnEnd": true,
   "auto-close-tag.SublimeText3Mode": true,      // Following setting requires Auto Close Tag Extension
   "explorer.openEditors.visible": 0,
