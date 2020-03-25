@@ -1,5 +1,5 @@
 # Image metadata and config.
-FROM circleci/node:10-browsers  
+FROM circleci/node:10-browsers
 # Ideally, the image version should be what we use on CI.
 # See `executors > browsers-executor` in `.circleci/config.yml`.
 
@@ -17,11 +17,12 @@ USER root
 
 # Configure `Node.js`/`npm` and install utilities.
 RUN npm config --global set user root
-#RUN npm install --global yarn@latest  
+#RUN npm install --global yarn@latest
 # Ideally, the version should be what we use on CI.
 # See `commands > overwrite_yarn` in `.circleci/config.yml`.
 RUN npm install -g @angular/cli
 RUN npm i -D prettier
+
 # Go! (And keep going.)
 CMD ["tail", "--follow", "/dev/null"]
 
