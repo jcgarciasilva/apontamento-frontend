@@ -1,13 +1,19 @@
+
+
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
   width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidenav .mat-toolbar {
   background: inherit;
+  position: fixed;
 }
 
 .mat-toolbar.mat-primary {

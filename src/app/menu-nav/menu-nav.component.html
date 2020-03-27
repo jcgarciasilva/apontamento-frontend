@@ -1,20 +1,5 @@
-<mat-sidenav-container class="sidenav-container" >
-  <mat-sidenav #drawer class="sidenav" color="primary" fixedInViewport
-      [attr.role]="(isHandset$) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$) ? 'push' : 'side'"
-      [opened]='true'
-  >
-    <mat-toolbar></mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/home" outerLinkActive="active-link"> <mat-icon>home</mat-icon> Home</a>
-      <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link"><mat-icon>access_time</mat-icon>  Apontamentos</a>
-      <a mat-list-item routerLink="/reports" outerLinkActive="active-link"> <mat-icon>dashboard</mat-icon> Relatórios</a>
-      <a mat-list-item routerLink="/cadastro" outerLinkActive="active-link"><mat-icon>assignment</mat-icon> Cadastros</a>
-      <a mat-list-item routerLink="/user" outerLinkActive="active-link"><mat-icon>people_alt</mat-icon>  Usuários</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
+<div class="root-content">
+<mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -28,6 +13,22 @@
     <span class="flex-spacer"></span>
     <button mat-icon-button><mat-icon>account_circle</mat-icon></button>
     </mat-toolbar>
+<mat-sidenav-container class="sidenav-container" >
+
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" >
+    <mat-toolbar></mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home" outerLinkActive="active-link"> <mat-icon>home</mat-icon> <span> Home</span></a>
+      <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link"><mat-icon>access_time</mat-icon> <span> Apontamentos</span></a>
+      <a mat-list-item routerLink="/reports" outerLinkActive="active-link"> <mat-icon>dashboard</mat-icon> <span>Relatórios</span></a>
+      <a mat-list-item routerLink="/cadastro" outerLinkActive="active-link"><mat-icon>assignment</mat-icon> <span>Cadastros</span></a>
+      <a mat-list-item routerLink="/user" outerLinkActive="active-link"><mat-icon>people_alt</mat-icon> <span> Usuários</span></a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="page-content">
     <ng-content></ng-content>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</div>

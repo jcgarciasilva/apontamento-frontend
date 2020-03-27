@@ -1,8 +1,13 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$apontamento-primary: mat-palette($mat-amber, 700);
+
+$apontamento-primary: mat-palette($mat-amber, 700, );
 $apontamento-accent: mat-palette($mat-red, 900);
 
 $apontamento-theme: mat-light-theme($apontamento-primary, $apontamento-accent);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
 @include angular-material-theme($apontamento-theme);

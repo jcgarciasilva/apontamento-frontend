@@ -10,7 +10,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#ManagerModule' },
+  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroModule' },
   { path: 'user', component: UserComponent },
   { path: 'apontamento', component: ApontamentoComponent },
   { path: 'reports', component: ReportComponent },
@@ -23,3 +23,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

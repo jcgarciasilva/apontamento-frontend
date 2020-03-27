@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
   template: `
-  <mat-toolbar color="accent">
-    <a mat-button routerLink="/cadastro/client" routerLinkActive="active-link">Manager's Dashboard</a>
-    <a mat-button routerLink="/cadastro/project" routerLinkActive="active-link">User Management</a>
-    <a mat-button routerLink="/cadastro/service" routerLinkActive="active-link">Receipt Lookup</a>
-    <a mat-button routerLink="/cadastro/parameter" routerLinkActive="active-link">Receipt Lookup</a>
-  </mat-toolbar>
+  <h1>Cadastros</h1>
+
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link routerLink="/cadastro/clients" routerLinkActive>Clientes</a>
+    <a mat-tab-link [routerLink="/cadastro/project" routerLinkActive>Projetos</a>
+    <a mat-tab-link [routerLink="/cadastro/service" routerLinkActive>Serviços</a>
+    <a mat-tab-link [routerLink="/cadastro/paramter" routerLinkActive>Parâmetros</a>
+</nav>
   <router-outlet></router-outlet>
   `,
   styles: []
 })
 export class CadastroComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private router: Router) {
+
+  }
 
   ngOnInit(): void {
+    this.router.events.subscribe((res) => {
+    });
   }
 
 }
