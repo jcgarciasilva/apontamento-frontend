@@ -30,6 +30,7 @@ body {
         bottom: 0;
         left: 0;
         right: 0;
+        height: 100vw;
 }
 
 .mat-list-item-content > mat-icon {
@@ -38,4 +39,23 @@ body {
 
 .mat-list-item-content > span {
   padding-left: 10px;
+}
+
+
+.master-data-content{
+  padding: 10px;
+}
+
+.master-data-content .master-data-button{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.master-data-content .master-data-button > button{
+  margin-right: 10px;
+}
+
+
+.mat-table {
+  width: 100%;
 }

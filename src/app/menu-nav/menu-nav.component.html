@@ -15,9 +15,8 @@
     </mat-toolbar>
 <mat-sidenav-container class="sidenav-container" >
 
-  <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" >
-    <mat-toolbar></mat-toolbar>
-    <mat-nav-list>
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" color="accent" >
+    <mat-nav-list color="accent">
       <a mat-list-item routerLink="/home" outerLinkActive="active-link"> <mat-icon>home</mat-icon> <span> Home</span></a>
       <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link"><mat-icon>access_time</mat-icon> <span> Apontamentos</span></a>
       <a mat-list-item routerLink="/reports" outerLinkActive="active-link"> <mat-icon>dashboard</mat-icon> <span>Relatórios</span></a>

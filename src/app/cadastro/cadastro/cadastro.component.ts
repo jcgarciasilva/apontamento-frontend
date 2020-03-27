@@ -7,10 +7,14 @@ import { Router } from '@angular/router';
   <h1>Cadastros</h1>
 
   <nav mat-tab-nav-bar>
-    <a mat-tab-link routerLink="/cadastro/clients" routerLinkActive>Clientes</a>
-    <a mat-tab-link routerLink="/cadastro/project" routerLinkActive>Projetos</a>
-    <a mat-tab-link routerLink="/cadastro/service" routerLinkActive>Serviços</a>
-    <a mat-tab-link routerLink="/cadastro/paramter" routerLinkActive>Parâmetros</a>
+    <a mat-tab-link routerLink="/cadastro/clients" routerLinkActive #rla="routerLinkActive"
+     active="rla.isActive">Clientes</a>
+    <a mat-tab-link routerLink="/cadastro/project" routerLinkActive #rla="routerLinkActive"
+     active="rla.isActive">Projetos</a>
+    <a mat-tab-link routerLink="/cadastro/service" routerLinkActive #rla="routerLinkActive"
+     active="rla.isActive">Serviços</a>
+    <a mat-tab-link routerLink="/cadastro/parameter" routerLinkActive #rla="routerLinkActive"
+     active="rla.isActive">Parâmetros</a>
 </nav>
   <router-outlet></router-outlet>
   `,

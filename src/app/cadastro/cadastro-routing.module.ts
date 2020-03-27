@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: 'clients', component: ClientsComponent },
       { path: 'project', component: ProjectsComponent },
       { path: 'service', component: ServiceComponent },
-      { path: '="/cadastro/service', component: ParameterComponent },
+      { path: 'parameter', component: ParameterComponent },
     ]
   },
 
