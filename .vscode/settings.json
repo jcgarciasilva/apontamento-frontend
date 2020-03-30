@@ -10,7 +10,7 @@
   "auto-close-tag.SublimeText3Mode": true,      // Following setting requires Auto Close Tag Extension
   "explorer.openEditors.visible": 0,
   "editor.minimap.enabled": false,
-  "html.autoClosingTags": false,
+  "html.autoClosingTags": true,
   "git.confirmSync": false,
   "editor.formatOnType": true,
   "editor.formatOnPaste": true,
@@ -24,5 +24,11 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
-  "npm.enableScriptExplorer": true
+  "npm.enableScriptExplorer": true,
+  // Configures if the built-in HTML language suggests Angular V1 tags and properties.
+  "html.suggest.angular1": true,
+  // Configures if the built-in HTML language suggests Ionic tags, properties and values.
+  "html.suggest.ionic": true,
+  // Configures if the built-in HTML language suggests HTML5 tags, properties and values.
+  "html.suggest.html5": true
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReportComponent } from './report/report.component';
 import { UserComponent } from './user/user.component';
@@ -14,6 +15,9 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'apontamento', component: ApontamentoComponent },
   { path: 'reports', component: ReportComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'login/:redirectUrl', component: LoginComponent },
+
   { path: '**', component: PageNotFoundComponent }
 
 ];

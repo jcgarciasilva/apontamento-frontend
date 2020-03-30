@@ -1,121 +1,107 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { sign } from 'fake-jwt-sign';
+import * as decode from 'jwt-decode';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { transformError } from '../common/common';
+import { Role } from './role.enum';
 // import { CacheService } from './cache.service';
 
 
-// export interface IAuthService {
-//   readonly authStatus$: BehaviorSubject<IAuthStatus>
-//   readonly currentUser$: BehaviorSubject<IUser>
-//   login(email: string, password: string): Observable<void>
-//   logout(clearToken: boolean): void
-//   getToken(): string
-// }
+export interface IAuthService {
+  readonly authStatus$: BehaviorSubject<IAuthStatus>;
+  // readonly currentUser$: BehaviorSubject<IUser>;
+  login(email: string, password: string): Observable<void>;
+  logout(clearToken: boolean): void;
+  getToken(): string;
+}
 
-// export interface IAuthStatus {
-//   isAuthenticated: boolean
-//   userRole: Role
-//   userId: string
-// }
+export interface IAuthStatus {
+  isAuthenticated: boolean;
+  userRole: Role;
+  userId: string;
+}
 
-// export interface IServerAuthResponse {
-//   accessToken: string
-// }
+export interface IServerAuthResponse {
+  accessToken: string;
+}
 
-// export const defaultAuthStatus = {
-//   isAuthenticated: false,
-//   userRole: Role.None,
-//   userId: null,
-// }
+export const defaultAuthStatus = {
+  isAuthenticated: false,
+  userRole: Role.None,
+  userId: null,
+};
 
 @Injectable()
-export abstract class AuthService {
-  // readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
-  // readonly currentUser$ = new BehaviorSubject<User>(new User())
-  // protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
-  //   filter(status => status.isAuthenticated),
-  //   flatMap(() => this.getCurrentUser()),
-  //   map(user => this.currentUser$.next(user)),
-  //   catchError(transformError)
-  // )
+export class AuthService {
 
-  constructor() {
+  private readonly authProvider: (
+    email: string,
+    password: string
+  ) => Observable<IServerAuthResponse>;
 
+  authStatus = new BehaviorSubject<IAuthStatus>(defaultAuthStatus);
 
-    // if (this.hasExpiredToken()) {
-    //   this.logout(true)
-    // } else {
-    //   this.authStatus$.next(this.getAuthStatusFromToken())
-    //   // To load user on browser refresh, resume pipeline must activate on the next cycle
-    //   // Which allows for all services to constructed properly
-    //   setTimeout(() => this.resumeCurrentUser$.subscribe(), 0)
-    // }
+  constructor(private httpClient: HttpClient) {
+    this.authProvider = this.fakeAuthProvider;
+    // Example of a real login call to server-side
+    // this.authProvider = this.exampleAuthProvider”
   }
 
-  // protected abstract authProvider(
-  //   email: string,
-  //   password: string
-  // ): Observable<IServerAuthResponse>
+  private fakeAuthProvider(
+    email: string,
+    password: string
+  ): Observable<IServerAuthResponse> {
+    if (!email.toLowerCase().endsWith('@test.com')) {
+      return throwError('Failed to login! Email needs to end with @test.com.');
+    }
 
-  // protected abstract transformJwtToken(token: unknown): IAuthStatus
+    const authStatus = {
+      isAuthenticated: true,
+      userId: 'e4d1bc2ab25c',
+      userRole: email.toLowerCase().includes('Visualiza')
+        ? Role.Visualiza
+        : email.toLowerCase().includes('Atualiza')
+          ? Role.Atualiza
+          : email.toLowerCase().includes('Admin') ? Role.Admin : Role.None,
+    } as IAuthStatus;
 
-  // protected abstract getCurrentUser(): Observable<User>
+    const authResponse = {
+      accessToken: sign(authStatus, 'secret', {
+        expiresIn: '1h',
+        algorithm: 'none',
+      }),
+    } as IServerAuthResponse;
 
-  // login(email: string, password: string): Observable<void> {
-  //   this.clearToken()
+    return of(authResponse);
+  }
 
-  //   const loginResponse$ = this.authProvider(email, password).pipe(
-  //     map(value => {
-  //       this.setToken(value.accessToken)
-  //       const token = decode(value.accessToken)
-  //       return this.transformJwtToken(token)
-  //     }),
-  //     tap(status => this.authStatus$.next(status)),
-  //     filter(status => status.isAuthenticated),
-  //     flatMap(() => this.getCurrentUser()),
-  //     map(user => this.currentUser$.next(user)),
-  //     catchError(transformError)
-  //   )
+  login(email: string, password: string): Observable<IAuthStatus> {
+    this.logout();
 
-  //   loginResponse$.subscribe({
-  //     error: err => {
-  //       this.logout()
-  //       return throwError(err)
-  //     },
-  //   })
+    const loginResponse = this.authProvider(email, password).pipe(
+      map(value => {
+        return decode(value.accessToken) as IAuthStatus;
+      }),
+      catchError(transformError)
+    );
 
-  //   return loginResponse$
-  // }
+    loginResponse.subscribe(
+      res => {
+        this.authStatus.next(res);
+      },
+      err => {
+        this.logout();
+        return throwError(err);
+      }
+    );
 
-  // logout(clearToken = false) {
-  //   if (clearToken) {
-  //     this.clearToken()
-  //   }
-  //   setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0)
-  // }
+    return loginResponse;
+  }
 
-  // protected setToken(jwt: string) {
-  //   this.setItem('jwt', jwt)
-  // }
-
-  // getToken(): string {
-  //   return this.getItem('jwt') || ''
-  // }
-
-  // protected clearToken() {
-  //   this.removeItem('jwt')
-  // }
-
-  // protected hasExpiredToken(): boolean {
-  //   const jwt = this.getToken()
-
-  //   if (jwt) {
-  //     const payload = decode(jwt) as any
-  //     return Date.now() >= payload.exp * 1000
-  //   }
-
-  //   return true
-  // }
-
-  // protected getAuthStatusFromToken(): IAuthStatus {
-  //   return this.transformJwtToken(decode(this.getToken()))
-  // }
+  logout() {
+    this.authStatus.next(defaultAuthStatus);
+  }
 }
+

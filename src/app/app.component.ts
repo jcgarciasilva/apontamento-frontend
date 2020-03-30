@@ -7,7 +7,7 @@ import { SubSink } from 'subsink';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: []
 })
 export class AppComponent implements OnInit, OnDestroy {
 

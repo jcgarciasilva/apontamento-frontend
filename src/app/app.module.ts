@@ -1,4 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,9 +14,11 @@ import 'hammerjs';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
 import { CadastroModule } from './cadastro/cadastro.module';
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material.module';
 import { MenuNavComponent } from './menu-nav/menu-nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -30,10 +33,12 @@ import { UserComponent } from './user/user.component';
     MenuNavComponent,
     UserComponent,
     ApontamentoComponent,
-    DashboardsComponent
+    DashboardsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
@@ -49,7 +54,7 @@ import { UserComponent } from './user/user.component';
     MatButtonModule
   ],
   providers: [
-    // AuthService
+    AuthService,
   ],
   bootstrap: [
     AppComponent
