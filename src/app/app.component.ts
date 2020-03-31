@@ -3,6 +3,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,21 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'apontamento';
   private subs = new SubSink();
   isOpen: boolean;
+  _displayMenu = false;
 
   constructor(
     public media: MediaObserver,
+    public authService: AuthService,
   ) { }
 
   ngOnInit(): void {
+
+    this.authService.authStatus.subscribe(authStatus => {
+      setTimeout(() => {
+        this._displayMenu = authStatus.isAuthenticated;
+      }, 0);
+    });
+
 
     this.subs.sink = combineLatest([
       this.media.asObservable(),
@@ -37,8 +47,13 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe();
 
   }
+
   ngOnDestroy(): void {
     throw new Error("Method not implemented.");
+  }
+
+  get displayMenu() {
+    return this._displayMenu;
   }
 
 
