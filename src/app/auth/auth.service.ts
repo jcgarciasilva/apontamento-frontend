@@ -5,6 +5,7 @@ import * as decode from 'jwt-decode';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { transformError } from '../common/common';
+import { CacheService } from './cache.service';
 import { Role } from './role.enum';
 // import { CacheService } from './cache.service';
 
@@ -34,16 +35,23 @@ export const defaultAuthStatus = {
 };
 
 @Injectable()
-export class AuthService {
+export class AuthService extends CacheService {
 
   private readonly authProvider: (
     email: string,
     password: string
   ) => Observable<IServerAuthResponse>;
 
-  authStatus = new BehaviorSubject<IAuthStatus>(defaultAuthStatus);
+  authStatus = new BehaviorSubject<IAuthStatus>(
+    this.getItem('authStatus') || defaultAuthStatus
+  );
+
 
   constructor(private httpClient: HttpClient) {
+    super();
+    this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus));
+
+
     this.authProvider = this.fakeAuthProvider;
     // Example of a real login call to server-side
     // this.authProvider = this.exampleAuthProvider”
@@ -82,6 +90,7 @@ export class AuthService {
 
     const loginResponse = this.authProvider(email, password).pipe(
       map(value => {
+        this.setToken(value.accessToken);
         return decode(value.accessToken) as IAuthStatus;
       }),
       catchError(transformError)
@@ -101,7 +110,25 @@ export class AuthService {
   }
 
   logout() {
+    this.clearToken();
     this.authStatus.next(defaultAuthStatus);
   }
+
+  private setToken(jwt: string) {
+    this.setItem('jwt', jwt);
+  }
+
+  private getDecodedToken(): IAuthStatus {
+    return decode(this.getItem('jwt'));
+  }
+
+  getToken(): string {
+    return this.getItem('jwt') || '';
+  }
+
+  private clearToken() {
+    this.removeItem('jwt');
+  }
+
 }
 

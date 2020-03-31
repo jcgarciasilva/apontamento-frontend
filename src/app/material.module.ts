@@ -37,8 +37,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
-    MatTabsModule
-
+    MatTabsModule,
   ],
   exports: [
     MatButtonModule,
@@ -58,7 +57,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatSortModule,
     MatMenuModule,
-    MatTabsModule
+    MatTabsModule,
   ],
 })
 export class MaterialModule { }

@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ import 'hammerjs';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { AuthService } from './auth/auth.service';
 import { CadastroModule } from './cadastro/cadastro.module';
 import { DashboardsComponent } from './dashboards/dashboards.component';
@@ -54,7 +55,11 @@ import { UserComponent } from './user/user.component';
     MatButtonModule
   ],
   providers: [
-    AuthService,
+    AuthService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [
     AppComponent
