@@ -5,16 +5,16 @@ import { Router } from '@angular/router';
   selector: 'app-cadastro',
   template: `
   <h1>Cadastros</h1>
-
+ <mat-divider></mat-divider>
   <nav mat-tab-nav-bar>
-    <a mat-tab-link routerLink="/cadastro/clients" routerLinkActive #rla="routerLinkActive"
-     active="rla.isActive">Clientes</a>
-    <a mat-tab-link routerLink="/cadastro/project" routerLinkActive #rla="routerLinkActive"
-     active="rla.isActive">Projetos</a>
-    <a mat-tab-link routerLink="/cadastro/service" routerLinkActive #rla="routerLinkActive"
-     active="rla.isActive">Serviços</a>
-    <a mat-tab-link routerLink="/cadastro/parameter" routerLinkActive #rla="routerLinkActive"
-     active="rla.isActive">Parâmetros</a>
+    <a mat-tab-link routerLink="/cadastro/clients"
+     active="activeLink == link">Clientes</a>
+    <a mat-tab-link routerLink="/cadastro/project"
+     active="activeLink == link">Projetos</a>
+    <a mat-tab-link routerLink="/cadastro/service"
+     active="activeLink == link">Serviços</a>
+    <a mat-tab-link routerLink="/cadastro/parameter"
+     active="activeLink == link">Parâmetros</a>
 </nav>
   <router-outlet></router-outlet>
   `,
@@ -22,13 +22,16 @@ import { Router } from '@angular/router';
 })
 export class CadastroComponent implements OnInit {
 
-
+  link: string;
   constructor(private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.router.events.subscribe((res) => {
+      console.log(this.router.url);
+      console.log(res);
+      this.link = this.router.url;
     });
   }
 

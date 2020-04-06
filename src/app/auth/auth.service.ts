@@ -11,9 +11,9 @@ import { Role } from './role.enum';
 
 
 export interface IAuthService {
-  readonly authStatus$: BehaviorSubject<IAuthStatus>;
+  readonly authStatus: BehaviorSubject<IAuthStatus>;
   // readonly currentUser$: BehaviorSubject<IUser>;
-  login(email: string, password: string): Observable<void>;
+  login(email: string, password: string): Observable<IAuthStatus>;
   logout(clearToken: boolean): void;
   getToken(): string;
 }
@@ -35,7 +35,7 @@ export const defaultAuthStatus = {
 };
 
 @Injectable()
-export class AuthService extends CacheService {
+export class AuthService extends CacheService implements IAuthService {
 
   private readonly authProvider: (
     email: string,

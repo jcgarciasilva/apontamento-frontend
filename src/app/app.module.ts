@@ -14,9 +14,12 @@ import 'hammerjs';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth/auth-guard.service';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { AuthService } from './auth/auth.service';
 import { CadastroModule } from './cadastro/cadastro.module';
+import { SimpleDialogComponent } from './common/simple-dialog/simpleDialog.component';
+import { UiService } from './common/ui.service';
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -35,7 +38,8 @@ import { UserComponent } from './user/user.component';
     UserComponent,
     ApontamentoComponent,
     DashboardsComponent,
-    LoginComponent
+    LoginComponent,
+    SimpleDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,7 @@ import { UserComponent } from './user/user.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    CadastroModule,
     ReactiveFormsModule,
     CadastroModule,
     LayoutModule,
@@ -55,11 +60,13 @@ import { UserComponent } from './user/user.component';
     MatButtonModule
   ],
   providers: [
+    UiService,
     AuthService, {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true
     },
+    AuthGuard,
   ],
   bootstrap: [
     AppComponent

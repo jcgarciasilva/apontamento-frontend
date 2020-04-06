@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { inject, TestBed } from '@angular/core/testing';
-import { CacheServiceService } from './cache.service';
+import { CacheService } from './cache.service';
 
 describe('Service: CacheService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CacheServiceService]
+      providers: [CacheService]
     });
   });
 
-  it('should ...', inject([CacheServiceService], (service: CacheServiceService) => {
+  it('should ...', inject([CacheService], (service: CacheService) => {
     expect(service).toBeTruthy();
   }));
 });

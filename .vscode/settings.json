@@ -1,29 +1,34 @@
 {
   "editor.tabSize": 2,
-  "editor.rulers": [90, 140],
+  "editor.rulers": [90],
   "files.trimTrailingWhitespace": true,
   "files.autoSave": "onFocusChange",
-  "editor.cursorBlinking": "solid",
   "git.enableSmartCommit": true,
-  "editor.autoIndent": "full",
   "debug.openExplorerOnEnd": true,
   "auto-close-tag.SublimeText3Mode": true,      // Following setting requires Auto Close Tag Extension
   "explorer.openEditors.visible": 0,
   "editor.minimap.enabled": false,
   "html.autoClosingTags": true,
   "git.confirmSync": false,
+  "editor.cursorBlinking": "solid",
   "editor.formatOnType": true,
+  "editor.autoIndent": "full",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false,
+    "source.fixAll.tslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "hookyqr.beautify"
+  },
   "prettier.printWidth": 90,                 // Following setting requires Prettier Extension
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
   "typescriptHero.imports.insertSemicolons": false, // Following setting requires TypeScriptHero Extension
   "typescriptHero.imports.multiLineWrapThreshold": 90,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
   "npm.enableScriptExplorer": true,
   // Configures if the built-in HTML language suggests Angular V1 tags and properties.
   "html.suggest.angular1": true,

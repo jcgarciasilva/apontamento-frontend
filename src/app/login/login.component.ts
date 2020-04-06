@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { Role } from '../auth/role.enum';
 
 @Component({
   selector: 'app-login',
@@ -41,9 +42,23 @@ export class LoginComponent implements OnInit {
       .login(submittedForm.value.userName, submittedForm.value.password)
       .subscribe(authStatus => {
         if (authStatus.isAuthenticated) {
-          this.router.navigate([this.redirectUrl || '/home']);
+          this.router.navigate([this.redirectUrl || this.homeRoutePerRole(authStatus.userRole)]);
         }
       }, error => (this.loginError = error));
   }
+
+  homeRoutePerRole(role: Role) {
+    switch (role) {
+      case Role.Admin:
+        return '/home';
+      case Role.Atualiza:
+        return '/apontamentos';
+      case Role.Visualiza:
+        return '/apontamntos';
+      default:
+        return '/users';
+    }
+  }
+
 
 }

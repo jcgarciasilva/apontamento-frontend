@@ -12,3 +12,4 @@ export function transformError(error: HttpErrorResponse | string) {
   }
   return throwError(errorMessage);
 }
+

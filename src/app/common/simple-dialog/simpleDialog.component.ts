@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-simple-dialog',
@@ -10,18 +11,18 @@ import { Component, OnInit } from '@angular/core';
     <mat-dialog-actions>
       <span class="flex-spacer"></span>
       <button mat-button mat-dialog-close *ngIf="data.cancelText">data.cancelText</button>
-      <button mat-button mat-button-raised color="primary" [mat-dialog-close]="true"
-        cdkFocusInitial>
+      <button mat-button mat-button-raised color="primary" [mat-dialog-close]="true" cdkFocusInitial>
         data.okText
       </button>
     </mat-dialog-actions>
 
   `,
-  styleUrls: ['./simpleDialog.component.css']
+  styleUrls: []
 })
 export class SimpleDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<SimpleDialogComponent, boolean>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
   }

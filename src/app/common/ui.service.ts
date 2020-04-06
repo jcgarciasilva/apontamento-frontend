@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { SimpleDialogComponent } from './simple-dialog/simpleDialog.component';
+
 
 @Injectable()
 export class UiService {
@@ -24,7 +25,7 @@ export class UiService {
     okText = 'OK',
     cancelText?: string,
     customConfig?: MatDialogConfig
-  ): Observable<Boolean> {
+  ): Observable<boolean> {
     const dialogRef = this.dialog.open(
       SimpleDialogComponent,
       customConfig || {
@@ -35,7 +36,4 @@ export class UiService {
 
     return dialogRef.afterClosed();
   }
-}
-
-
 }
