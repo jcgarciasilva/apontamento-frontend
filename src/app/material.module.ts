@@ -17,6 +17,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule, MatLineModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   imports: [
@@ -38,6 +41,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSortModule,
     MatMenuModule,
     MatTabsModule,
+    MatDividerModule,
+    MatLineModule,
+    MatNativeDateModule,
+    MatSelectModule,
+
   ],
   exports: [
     MatButtonModule,
@@ -58,6 +66,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSortModule,
     MatMenuModule,
     MatTabsModule,
+    MatDividerModule,
+    MatLineModule,
+    MatNativeDateModule,
+    MatSelectModule,
   ],
 })
 export class MaterialModule { }

@@ -15,6 +15,7 @@ export class UiService {
       action,
       config || {
         duration: 7000,
+        panelClass: ['mat-toolbar', 'mat-primary']
       }
     );
   }

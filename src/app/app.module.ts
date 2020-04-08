@@ -53,11 +53,6 @@ import { UserComponent } from './user/user.component';
     ReactiveFormsModule,
     CadastroModule,
     LayoutModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule
   ],
   providers: [
     UiService,
