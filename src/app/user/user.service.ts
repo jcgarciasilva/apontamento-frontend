@@ -28,7 +28,7 @@ export class UserService extends CacheService {
     );
     userObservable.subscribe(
       user => this.currentUser.next(user),
-      err => Observable.throw(err)
+      err => Observable.throw(err);
     );
     return userObservable;
   }
@@ -48,7 +48,7 @@ export class UserService extends CacheService {
         this.currentUser.next(res);
         this.removeItem('draft-user');
       },
-      err => Observable.throw(err)
+      err => Observable.throw(err);
     );
 
     return updateResponse;

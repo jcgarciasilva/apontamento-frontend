@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, MatLineModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatLineModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatProgressBarModule,
 
   ],
   exports: [
@@ -70,6 +72,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatLineModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatProgressBarModule,
   ],
 })
 export class MaterialModule { }

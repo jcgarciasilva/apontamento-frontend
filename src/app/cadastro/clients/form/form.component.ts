@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { IClient, Client } from '../client';
 import { DataService } from 'src/app/services/data.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-form',
@@ -12,21 +12,24 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class FormComponent implements OnInit {
 
+
   form: FormGroup;
   formErrorName: string;
-
+  link: string;
 
   constructor(private dialogRef: MatDialogRef<FormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private service: DataService) {
-    this.buildForm(new Client());
+    this.link = data.client?._links?.self?.href;
+    this.buildForm(data.client);
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   buildForm(client?: IClient) {
+    console.log(this.data);
+    console.log(this.data._links);
     this.form = this.formBuilder.group({
       name: [
         client.name,
@@ -38,7 +41,7 @@ export class FormComponent implements OnInit {
 
   save() {
     const cli = new Client(0, this.form.get('name').value);
-    this.service.save(cli).subscribe(
+    this.service.save(cli, this.link).subscribe(
       data => {
         this.dialogRef.close(data);
       },

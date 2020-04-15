@@ -3,15 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Entity } from '../data.types';
 
 
-export abstract class DataModel {
-  id: number;
-  nome: string;
-}
 
-export class GenericDataSource extends DataSource<DataModel> {
-  data: DataModel[] = [{ id: 0, nome: '' }];
+export class GenericDataSource extends DataSource<Entity> {
+  data: Entity[];
   paginator: MatPaginator;
   sort: MatSort;
 
@@ -24,7 +21,7 @@ export class GenericDataSource extends DataSource<DataModel> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<DataModel[]> {
+  connect(): Observable<Entity[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -48,7 +45,7 @@ export class GenericDataSource extends DataSource<DataModel> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: DataModel[]) {
+  private getPagedData(data: Entity[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -57,7 +54,7 @@ export class GenericDataSource extends DataSource<DataModel> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: DataModel[]) {
+  private getSortedData(data: Entity[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }
