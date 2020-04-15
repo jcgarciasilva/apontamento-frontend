@@ -23,7 +23,7 @@ export class UiService {
   showDialog(
     title: string,
     content: string,
-    okText = 'OK',
+    okText: string = 'OK',
     cancelText?: string,
     customConfig?: MatDialogConfig
   ): Observable<boolean> {
@@ -31,7 +31,7 @@ export class UiService {
       SimpleDialogComponent,
       customConfig || {
         width: '300px',
-        data: { title: title, content: content, okText: okText, cancelText: cancelText },
+        data: { title, content, okText, cancelText },
       }
     );
 

@@ -108,6 +108,4 @@ export class ClientsComponent implements AfterViewInit, OnInit {
   get isLoadingResults() {
     return this._isLoadingResults;
   }
-
-
 }
