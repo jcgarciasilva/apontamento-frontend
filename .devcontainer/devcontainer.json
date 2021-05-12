@@ -2,8 +2,13 @@
 {
   "name": "Angular dev container",
   "dockerFile": "Dockerfile",
-  "appPort": [4000, 4200, 4433, 5000, 8080, 9876],
-  "postCreateCommand": "yarn install",
+  "appPort": [4200],
+  "postCreateCommand": "npm install && git config --global user.email 'jcgarciasilva@gmail.com' && git config --global user.name 'João Garcia' ",
+  "settings": {
+        "terminal.integrated.shell.linux": "/bin/zsh",
+                "editor.fontFamily": "Menlo for Powerline",
+                "terminal.integrated.fontSize": 14
+  },
   "extensions": [
     "devondcarew.bazel-code",
     "gkalpak.aio-docs-utils",
@@ -19,14 +24,12 @@
      "esbenp.prettier-vscode",
      "ms-vscode.vscode-typescript-tslint-plugin",
      "visualstudioexptteam.vscodeintellicode",
-     "steoates.autoimport",     
+     "steoates.autoimport",
     "johnpapa.angular-essentials",
     "formulahendry.auto-close-tag",
     "PeterJausovec.vscode-docker",
-    "WallabyJs.quokka-vscode",
     "rbbit.typescript-hero",
-    "DSKWRK.vscode-generate-getter-setter",
-
   ],
-  
+ "remoteUser": "node"
+
 }

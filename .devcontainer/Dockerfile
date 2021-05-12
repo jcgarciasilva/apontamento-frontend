@@ -1,18 +1,16 @@
 # Image metadata and config.
-FROM circleci/node:10-browsers
-# Ideally, the image version should be what we use on CI.
-# See `executors > browsers-executor` in `.circleci/config.yml`.
+ARG VARIANT="14-buster"
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
+
+COPY .zshrc /home/vscode/.zshrc
+COPY .zshrc /root/.zshrc
 
 LABEL name="Angular dev environment" \
       description="This image can be used to create a dev environment for building Angular." \
       vendor="angular" \
       version="1.0"
 
-EXPOSE 4000 4200 4433 5000 8080 9876
-
-
-# Switch to `root` (CircleCI images use `circleci` as the user).
-USER root
+EXPOSE  4200
 
 
 # Configure `Node.js`/`npm` and install utilities.
@@ -21,7 +19,8 @@ RUN npm config --global set user root
 # Ideally, the version should be what we use on CI.
 # See `commands > overwrite_yarn` in `.circleci/config.yml`.
 RUN npm install -g @angular/cli
-RUN npm i -D prettier
+RUN npm install -g firebase
+RUN npm install @angular/fire
 
 # Go! (And keep going.)
 CMD ["tail", "--follow", "/dev/null"]
