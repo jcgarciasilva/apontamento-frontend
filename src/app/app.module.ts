@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import 'hammerjs';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
