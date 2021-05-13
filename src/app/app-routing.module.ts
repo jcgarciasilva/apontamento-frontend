@@ -14,7 +14,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroModule', canLoad: [AuthGuard], data: { expectedRole: Role.Admin } },
+  { path: 'cadastro', loadChildren: () => import('./cadastro/cadastro.module').then(m => m.CadastroModule), canLoad: [AuthGuard], data: { expectedRole: Role.Admin } },
   { path: 'user', component: UserComponent },
   { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'apontamento', component: ApontamentoComponent },
