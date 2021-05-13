@@ -14,11 +14,12 @@ EXPOSE  4200
 
 
 # Configure `Node.js`/`npm` and install utilities.
-RUN npm config --global set user root
+#RUN npm config --global set user root
 #RUN npm install --global yarn@latest
+RUN npm install --global npm@latest
 # Ideally, the version should be what we use on CI.
 # See `commands > overwrite_yarn` in `.circleci/config.yml`.
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli@9.0.7
 RUN npm install -g firebase
 RUN npm install @angular/fire
 
