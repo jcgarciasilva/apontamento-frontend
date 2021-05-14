@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { sign } from 'fake-jwt-sign';
 import * as decode from 'jwt-decode';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
@@ -7,127 +9,71 @@ import { catchError, map } from 'rxjs/operators';
 import { transformError } from '../common/common';
 import { CacheService } from './cache.service';
 import { Role } from './role.enum';
+import { switchMap } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 // import { CacheService } from './cache.service';
 
 
-export interface IAuthService {
-  readonly authStatus: BehaviorSubject<IAuthStatus>;
-  // readonly currentUser$: BehaviorSubject<IUser>;
-  login(email: string, password: string): Observable<IAuthStatus>;
-  logout(clearToken: boolean): void;
-  getToken(): string;
+export interface User {
+  uid: string,
+  email: string,
+  photoUrl?: string,
+  displayName?: string
 }
-
-export interface IAuthStatus {
-  isAuthenticated: boolean;
-  userRole: Role;
-  userId: string;
-}
-
-export interface IServerAuthResponse {
-  accessToken: string;
-}
-
-export const defaultAuthStatus = {
-  isAuthenticated: false,
-  userRole: Role.None,
-  userId: null,
-};
 
 @Injectable()
-export class AuthService extends CacheService implements IAuthService {
-
-  private readonly authProvider: (
-    email: string,
-    password: string
-  ) => Observable<IServerAuthResponse>;
-
-  authStatus = new BehaviorSubject<IAuthStatus>(
-    this.getItem('authStatus') || defaultAuthStatus
-  );
+export class AuthService extends CacheService {
 
 
-  constructor(private httpClient: HttpClient) {
+  user$: Observable<User>;
+
+  constructor(private angularFirebaseAuth: AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore,) {
     super();
-    this.authStatus.subscribe(authStatus => this.setItem('authStatus', authStatus));
-
-
-    this.authProvider = this.fakeAuthProvider;
-    // Example of a real login call to server-side
-    // this.authProvider = this.exampleAuthProvider”
+    this.user$ = this.angularFirebaseAuth.authState.pipe(
+      switchMap(user => {
+        // Logged in
+        if (user) {
+          return this.angularFirestore.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          // Logged out
+          return of(null);
+        }
+      })
+    )
   }
 
-  private fakeAuthProvider(
-    email: string,
-    password: string
-  ): Observable<IServerAuthResponse> {
-    if (!email.toLowerCase().endsWith('@test.com')) {
-      return throwError('Failed to login! Email needs to end with @test.com.');
+  getUser() {
+    return this.angularFirebaseAuth.authState;
+  }
+
+
+  login(email: string, password: string) {
+    return this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.router.navigate(['home']);
+      }).catch((error) => {
+        window.alert(error.message)
+      })
+  }
+
+  updateUserData(user) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(`users/${user.uid}`);
+
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
     }
 
-    const authStatus = {
-      isAuthenticated: true,
-      userId: 'e4d1bc2ab25c',
-      userRole: email.toLowerCase().includes('Visualiza')
-        ? Role.Visualiza
-        : email.toLowerCase().includes('Atualiza')
-          ? Role.Atualiza
-          : email.toLowerCase().includes('Admin') ? Role.Admin : Role.None,
-    } as IAuthStatus;
+    return userRef.set(data, { merge: true })
 
-    const authResponse = {
-      accessToken: sign(authStatus, 'secret', {
-        expiresIn: '1h',
-        algorithm: 'none',
-      }),
-    } as IServerAuthResponse;
-
-    return of(authResponse);
   }
 
-  login(email: string, password: string): Observable<IAuthStatus> {
-    this.logout();
-
-    const loginResponse = this.authProvider(email, password).pipe(
-      map(value => {
-        this.setToken(value.accessToken);
-        return decode(value.accessToken) as IAuthStatus;
-      }),
-      catchError(transformError)
-    );
-
-    loginResponse.subscribe(
-      res => {
-        this.authStatus.next(res);
-      },
-      err => {
-        this.logout();
-        return throwError(err);
-      }
-    );
-
-    return loginResponse;
-  }
-
-  logout() {
-    this.clearToken();
-    this.authStatus.next(defaultAuthStatus);
-  }
-
-  private setToken(jwt: string) {
-    this.setItem('jwt', jwt);
-  }
-
-  private getDecodedToken(): IAuthStatus {
-    return decode(this.getItem('jwt'));
-  }
-
-  getToken(): string {
-    return this.getItem('jwt') || '';
-  }
-
-  private clearToken() {
-    this.removeItem('jwt');
+  async signOut() {
+    await this.angularFirebaseAuth.signOut();
+    this.router.navigate(['/']);
   }
 
 }

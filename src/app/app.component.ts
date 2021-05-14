@@ -24,13 +24,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.authService.authStatus.subscribe(authStatus => {
-      setTimeout(() => {
-        this._displayMenu = authStatus.isAuthenticated;
-      }, 0);
-    });
-
-
     this.subs.sink = combineLatest([
       this.media.asObservable(),
     ])

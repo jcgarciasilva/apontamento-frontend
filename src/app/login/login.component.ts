@@ -40,11 +40,6 @@ export class LoginComponent implements OnInit {
   async login(submittedForm: FormGroup) {
     this.authService
       .login(submittedForm.value.userName, submittedForm.value.password)
-      .subscribe(authStatus => {
-        if (authStatus.isAuthenticated) {
-          this.router.navigate([this.redirectUrl || this.homeRoutePerRole(authStatus.userRole)]);
-        }
-      }, error => (this.loginError = error));
   }
 
   homeRoutePerRole(role: Role) {
