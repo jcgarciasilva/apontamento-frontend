@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { User } from '../auth/auth.service';
 
 @Component({
   selector: 'app-menu-nav',
@@ -12,6 +13,7 @@ export class MenuNavComponent {
 
   @Input() opened: boolean;
   @Input() isAuthenticated: boolean;
+  @Input() user: User;
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

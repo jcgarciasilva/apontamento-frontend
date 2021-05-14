@@ -3,7 +3,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
-import { AuthService } from './auth/auth.service';
+import { AuthService, User } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +17,21 @@ export class AppComponent implements OnInit, OnDestroy {
   isOpen: boolean;
   _displayMenu = false;
 
+  user: User;
+
   constructor(
     public media: MediaObserver,
     public authService: AuthService,
   ) { }
 
   ngOnInit(): void {
+
+
+
+    this.authService.user$
+      .subscribe(user => {
+        this.user = user;
+      });
 
     this.subs.sink = combineLatest([
       this.media.asObservable(),

@@ -51,7 +51,9 @@ export class AuthService extends CacheService {
   login(email: string, password: string) {
     return this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.router.navigate(['home']);
+        this.router.navigate(['/home']);
+        console.log(`bem vindo ${result}`)
+        console.log(result)
       }).catch((error) => {
         window.alert(error.message)
       })
