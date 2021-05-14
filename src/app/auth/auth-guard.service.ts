@@ -3,20 +3,22 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UiService } from '../common/ui.service';
-import { AuthService, IAuthStatus } from './auth.service';
+import { AuthService, User } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  protected currentAuthStatus: IAuthStatus;
+
+  user: User;
 
   constructor(protected authService: AuthService,
     protected router: Router,
     private uiService: UiService) {
-    this.authService.authStatus.subscribe(
-      authStatus => (this.currentAuthStatus = authStatus)
+    this.authService.user$.subscribe(
+      authStatus => (this.user = authStatus)
     );
+
   }
 
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
@@ -44,7 +46,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       const expectedRole = route.data.expectedRole;
 
       if (expectedRole) {
-        roleMatch = this.currentAuthStatus.userRole === expectedRole;
+        roleMatch = this.user.role === expectedRole;
       }
 
       if (roleMatch) {
@@ -52,8 +54,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       }
     }
 
-    if (!this.currentAuthStatus.isAuthenticated || !roleMatch) {
-      this.showAlert(this.currentAuthStatus.isAuthenticated, roleMatch);
+    if (!this.user || !roleMatch) {
+      this.showAlert(true, roleMatch);
 
       this.router.navigate(['login', params || {}]);
       return false;

@@ -18,7 +18,8 @@ export interface User {
   uid: string,
   email: string,
   photoUrl?: string,
-  displayName?: string
+  displayName?: string,
+  role: Role
 }
 
 @Injectable()
@@ -64,7 +65,8 @@ export class AuthService extends CacheService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
+      role: Role.Visualiza
     }
 
     return userRef.set(data, { merge: true })
