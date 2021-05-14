@@ -4,6 +4,9 @@
   "dockerFile": "Dockerfile",
   "appPort": [4200],
   "postCreateCommand": "npm install && git config --global user.email 'jcgarciasilva@gmail.com' && git config --global user.name 'João Garcia' ",
+   "mounts": [
+                "source=./node_modules,target=/workspaces/apontamento-frontend/node_modules,type=bind,consistency=cached"
+        ],
   "settings": {
         "terminal.integrated.shell.linux": "/bin/zsh",
                 "editor.fontFamily": "Menlo for Powerline",
