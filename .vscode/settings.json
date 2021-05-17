@@ -2,7 +2,7 @@
   "editor.tabSize": 2,
   "editor.rulers": [90],
   "files.trimTrailingWhitespace": true,
-  "files.autoSave": "onFocusChange",
+  "files.autoSave": "off",
   "git.enableSmartCommit": true,
   "debug.openExplorerOnEnd": true,
   "auto-close-tag.SublimeText3Mode": true,      // Following setting requires Auto Close Tag Extension
