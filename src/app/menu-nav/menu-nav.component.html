@@ -1,5 +1,5 @@
-<div class="root-content">
-<mat-toolbar color="primary" *ngIf="user">
+<div class="root-content" *ngIf="user">
+<mat-toolbar color="primary" >
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -10,17 +10,17 @@
       </button>
       <span>Apontamento</span>
     <span class="flex-spacer"></span>
+    {{user.email}}
     <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_circle</mat-icon></button>
     </mat-toolbar>
     <mat-menu #appMenu="matMenu">
       <button mat-menu-item>Settings</button>
-      {{user}}
       <button mat-menu-item>Logout</button>
     </mat-menu>
 
 <mat-sidenav-container class="sidenav-container" >
 
-  <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" color="accent" *ngIf="user">
+  <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" color="accent" >
     <mat-nav-list color="accent">
       <a mat-list-item routerLink="/home" outerLinkActive="active-link"> <mat-icon>home</mat-icon> <span> Home</span></a>
       <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link"><mat-icon>access_time</mat-icon> <span> Apontamentos</span></a>

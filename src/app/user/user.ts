@@ -1,7 +1,11 @@
 import { Role } from '../auth/role.enum';
 
+export enum Status {
+  ACTIVE,
+  INACTIVE
+}
 export interface IUser {
-  id: string;
+  uid: string;
   email: string;
   name: {
     first: string
@@ -9,7 +13,7 @@ export interface IUser {
   };
   picture: string;
   role: Role;
-  userStatus: boolean;
+  userStatus: Status;
   dateOfBirth: Date;
   address: {
     line1: string
@@ -29,13 +33,13 @@ export interface IPhone {
 
 export class User implements IUser {
   constructor(
-    public id = '',
+    public uid = '',
     public email = '',
     public name = { first: '', last: '' },
     public picture = '',
     public role = Role.None,
     public dateOfBirth = null,
-    public userStatus = false,
+    public userStatus = Status.ACTIVE,
     public address = {
       line1: '',
       line2: '',
@@ -48,7 +52,7 @@ export class User implements IUser {
 
   static BuildUser(user: IUser) {
     return new User(
-      user.id,
+      user.uid,
       user.email,
       user.name,
       user.picture,

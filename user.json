@@ -1,0 +1,317 @@
+[
+  {
+    "username": "ALEXMAR",
+    "email": "alex@bitby.com.br",
+    "name": "Alex Mariano",
+    "password": "4ADD6F63D54A0AEEF4765EF203049B67A7FD9B7F988BDA3EC91AE390B3A1F30B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "Anderson",
+    "email": "anderson@oportuna.com.br",
+    "name": "Anderson Pereira Rodrigues",
+    "password": "4B177CF57484BAE04E725E7718A8F17DEE4768DDA340AC5D160F339B35FE298C",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "BRANDYS",
+    "email": "renato@oportuna.com.br",
+    "name": "Renato Brandys",
+    "password": "99E54EF4FFBD384FC6716C41B2CA66CD9FC98F815958011DF67479AF218CCEAB",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "BRUNO",
+    "email": "bruno@oportuna.com.br",
+    "name": "Bruno Queiroz",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "CORINO",
+    "email": "corino@oportuna.com.br",
+    "name": "Francisco Corino",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "DANIELASU",
+    "email": "daniela@oportuna.com.br",
+    "name": "Daniela Suganuma",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "DANIELVMS",
+    "email": "DaniielVieira@outlook.com",
+    "name": "Daniel Vieira Mathias da Silva",
+    "password": "EA6CC035FB6791C01A41135668C65DC3559D02A3FD09ABF523EC433D56C3AE2B",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "EIVO",
+    "email": "emersoncivo@gmail.com",
+    "name": "Emerson Ivo",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "ENDERSON",
+    "email": "enderson@oportuna.com.br",
+    "name": "Enderson Rufino Amorim",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "ERICOM",
+    "email": "erico@oportuna.com.br",
+    "name": "Erico Mosca",
+    "password": "69BF0BC46F51B33377C4F3D92CAF876714F6BBBE99E7544487327920873F9820",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "FABRICIO",
+    "email": "fabricio@oportuna.com.br",
+    "name": "Fabricio Nunes",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "FABRICIOS",
+    "email": "sgotti@oportuna.com.br",
+    "name": "Fabricio Sgotti",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "GABRIELA",
+    "email": "gabriela.oliveiraa@hotmail.com",
+    "name": "Gabriela Lima de Oliveira",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "GVITOR",
+    "email": "vitorbep97@gmail.com",
+    "name": "Gabriel Vitor Santos Soares",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "JEFFERSON",
+    "email": "jefferson@oportuna.com.br",
+    "name": "Jefferson Rodrigues",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "JOAOC",
+    "email": "joao@oportuna.com.br",
+    "name": "João Carlos Garcia",
+    "password": "441339497157C24CDF73D0DE14C0C9A413BB992B047E910B30E22815034FBBF5",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "JOAOVITOR",
+    "email": "joaovotk@gmail.com",
+    "name": "João Vitor Freitas",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "KOMURA",
+    "email": "atkomura@gmail.com",
+    "name": "Anderson Komura",
+    "password": "3CBBBE0B7807137967E1B1E9D94186F8667608EE0CD2514AB7D93B6914E3C6E0",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "LEOMARES",
+    "email": "leonardo@oportuna.com.br",
+    "name": "Leonardo Mares de Sousa",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "LEONARDO",
+    "email": "leonardo@oportuna.com.br",
+    "name": "Leonardo Rodrigues Lopes",
+    "password": "190CC9F656D0CFD4E37E9518658E424B79380AE03298AD50017458895660C380",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "LUCAS",
+    "email": "lucas@oportuna.com.br",
+    "name": "Lucas Souza Marques",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "LUCASBREUR",
+    "email": "lucasbreur@gmail.com",
+    "name": "Lucas Breur",
+    "password": "25FD4478AC09F5EA3071DD985C10996FE8C2C03CBED9D90DA364A651DBDFD64D",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "LUCASCFS",
+    "email": "lucassiano00@gmail.com",
+    "name": "Lucas Cassiano F Souza",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "LUCASF",
+    "email": "lucas@oportuna.com.br",
+    "name": "Lucas Ferraz Silva",
+    "password": "A302EE7339CABF904E32BFBF03DBDC4FBD41C05CE53451B8A8B80C5B8219E34A",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "LUCIANA",
+    "email": "lgiannini@oportunainvest.com.br",
+    "name": "Luciana Giannini",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "LUIZTO",
+    "email": "tristao@oportuna.com.br",
+    "name": "Luiz Tristão",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "MAIKO",
+    "email": "maiko.markic@hotmail.com",
+    "name": "Maiko Markic",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "MailAdress",
+    "email": "aa@aa.com.br",
+    "name": "My Mail Adress",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "MATHEUS",
+    "email": "matheus.novais1014@gmail.com",
+    "name": "Matheus Paião de Novais",
+    "password": "42A9C4CF7560F7A04DE71736AE5B9EA27734FA5F6275B4BCCFDDBE49972ADAA2",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "MGARRIDO",
+    "email": "marciogarrido@hotmail.com",
+    "name": "Marcio Garrido",
+    "password": "2482BBFC8048AFC77DBBAB08DFF3675273F1C5FF2B31C64DF92D19189BD9D1BC",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "MIRO",
+    "email": "miro@oportuna.com.br",
+    "name": "Miro Teixeira",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "OtavioMP",
+    "email": "otavio.marpin@gmail.com",
+    "name": "Otávio Martins Pinheiro",
+    "password": "87194F6AB17BA7AA352A48B0DB7E4490BB2443AFF03A8D3C041FCB0E86B71357",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "PEDROH",
+    "email": "mpedro175@gmail.com",
+    "name": "Pedro Henrique Silva de Morais",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "POLATTO",
+    "email": "polatto@oportuna.com.br",
+    "name": "Alexandre Polatto",
+    "password": "69BF0BC46F51B33377C4F3D92CAF876714F6BBBE99E7544487327920873F9820",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "RAFAELR",
+    "email": "rafael@oportuna.com.br",
+    "name": "Rafael Reis",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "RAFALOPES",
+    "email": "rafaelrocha.lopes91@gmail.com",
+    "name": "Rafael Rocha Lopes",
+    "password": "2FA73EC9A60EB3DB28CD23376DF1B4B9CBD8B7F0C08A993DAB48139DC245E573",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "RAUL",
+    "email": "raul@oportuna.com.br",
+    "name": "Raul Santos Souza",
+    "password": "A6786F22D96DB8B4E28883D71854E8BEFA33CA16BB43F412B3626FFFDF51C80F",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "RICARDOBMF",
+    "email": "baraldi@oportuna.com.br",
+    "name": "Ricardo Baraldi",
+    "password": "F52440562D8AC0A0E87F1BCFD17FAF8B5720B6F3F3F605A71EF949DD071B6CFD",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "RODRIGOT",
+    "email": "rodrigo@oportuna.com.br",
+    "name": "Rodrigo Turassa",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "SILASPRADO",
+    "email": "silas988@hotmail.com",
+    "name": "Silas da Silva Prado",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "THALYSON",
+    "email": "thalyson@oportuna.com.br",
+    "name": "Thalyson Brandão Lopes",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "VictorGB",
+    "email": "victor.barbedo@hotmail.com",
+    "name": "Victor Gonçalves Barbedo",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "ACTIVE"
+  },
+  {
+    "username": "VINICIUS",
+    "email": "vinicius@oportuna.com.br",
+    "name": "Vinicius Pereira Severo",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "WHIGA",
+    "email": "abc@abc.com.br",
+    "name": "William Higa",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  },
+  {
+    "username": "WILSONL",
+    "email": "wilson@abc.com.br",
+    "name": "Wilson Lima",
+    "password": "C4726960CCC252091E94BDA3AB8DC6DB8D38A098711A394F3CA4A75CE4DD949B",
+    "status": "INACTIVE"
+  }
+]

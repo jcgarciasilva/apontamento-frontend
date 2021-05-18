@@ -26,22 +26,22 @@ import { MenuNavComponent } from './menu-nav/menu-nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReportComponent } from './report/report.component';
 import { UserComponent } from './user/user.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBkG4RIlpWthe63BiVrfLmItfKD5ginmR0",
-  authDomain: "oportuna-apontamento.firebaseapp.com",
-  databaseURL: "https://oportuna-apontamento-default-rtdb.firebaseio.com",
-  projectId: "oportuna-apontamento",
-  storageBucket: "oportuna-apontamento.appspot.com",
-  messagingSenderId: "193111487799",
-  appId: "1:193111487799:web:e5575ed3299f68c41796b2",
-  measurementId: "G-G8RRDPZPED"
+  apiKey: 'AIzaSyBkG4RIlpWthe63BiVrfLmItfKD5ginmR0',
+  authDomain: 'oportuna-apontamento.firebaseapp.com',
+  databaseURL: 'https://oportuna-apontamento-default-rtdb.firebaseio.com',
+  projectId: 'oportuna-apontamento',
+  storageBucket: 'oportuna-apontamento.appspot.com',
+  messagingSenderId: '193111487799',
+  appId: '1:193111487799:web:e5575ed3299f68c41796b2',
+  measurementId: 'G-G8RRDPZPED'
 };
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginLayoutComponent,
     HomeComponent,
     PageNotFoundComponent,
     ReportComponent,
@@ -49,8 +49,10 @@ const firebaseConfig = {
     UserComponent,
     ApontamentoComponent,
     DashboardsComponent,
+    LoginLayoutComponent,
     LoginComponent,
     SimpleDialogComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,6 @@ const firebaseConfig = {
     FormsModule,
     CadastroModule,
     ReactiveFormsModule,
-    CadastroModule,
     LayoutModule,
   ],
   providers: [

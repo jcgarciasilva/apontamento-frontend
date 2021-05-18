@@ -11,37 +11,20 @@ import { CacheService } from './cache.service';
 import { Role } from './role.enum';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from '../user/user';
 // import { CacheService } from './cache.service';
-
-
-export interface User {
-  uid: string,
-  email: string,
-  photoUrl?: string,
-  displayName?: string,
-  role: Role
-}
 
 @Injectable()
 export class AuthService extends CacheService {
 
+  constructor(private angularFirebaseAuth: AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore,) {
+    super();
+  }
+
 
   user$: Observable<User>;
 
-  constructor(private angularFirebaseAuth: AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore,) {
-    super();
-    this.user$ = this.angularFirebaseAuth.authState.pipe(
-      switchMap(user => {
-        // Logged in
-        if (user) {
-          return this.angularFirestore.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          // Logged out
-          return of(null);
-        }
-      })
-    )
-  }
+  async;
 
   getUser() {
     return this.angularFirebaseAuth.authState;
@@ -51,32 +34,43 @@ export class AuthService extends CacheService {
   login(email: string, password: string) {
     return this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log(`bem vindo ${result}`);
+        console.log(result);
+        this.updateUserData(result.user);
+
+        this.user$ = this.angularFirebaseAuth.authState.pipe(
+          switchMap(user => {
+            // Logged in
+            if (user) {
+              console.log(user);
+              this.updateUserData(user);
+              return this.angularFirestore.doc<User>(`users/${user.uid}`).valueChanges();
+            } else {
+              // Logged out
+              return of(null);
+            }
+          }));
         this.router.navigate(['/home']);
-        console.log(`bem vindo ${result}`)
-        console.log(result)
-      }).catch((error) => {
-        window.alert(error.message)
-      })
+      }
+      ).catch((error) => {
+        window.alert(error.message);
+      });
   }
 
   updateUserData(user) {
     // Sets user data to firestore on login
+    let data: User;
     const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(`users/${user.uid}`);
 
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      role: Role.Visualiza
-    }
+    data.uid = user.uid;
+    data.email = user.email;
 
-    return userRef.set(data, { merge: true })
+
+    return userRef.set(data, { merge: true });
 
   }
-
-  async signOut() {
-    await this.angularFirebaseAuth.signOut();
+  signOut() {
+    this.angularFirebaseAuth.signOut();
     this.router.navigate(['/']);
   }
 

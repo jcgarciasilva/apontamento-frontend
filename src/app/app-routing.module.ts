@@ -1,4 +1,3 @@
-import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
@@ -6,6 +5,7 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { Role } from './auth/role.enum';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { LayoutComponent } from './layout/layout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReportComponent } from './report/report.component';
 import { ProfileComponent } from './user/profile/profile.component';
@@ -15,32 +15,35 @@ import { LoginLayoutComponent } from './login/login-layout.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-
-  {
-    path: '', component: AppComponent, children: [
-      { path: 'home', component: HomeComponent, outlet: "master" },
-      { path: 'cadastro', outlet: "master", loadChildren: () => import('./cadastro/cadastro.module').then(m => m.CadastroModule), canLoad: [AuthGuard], data: { expectedRole: Role.Admin } },
-      { path: 'user', component: UserComponent, outlet: "master" },
-      { path: 'user/profile', component: ProfileComponent, outlet: "master", canActivate: [AuthGuard] },
-      { path: 'apontamento', component: ApontamentoComponent, outlet: "master" },
-      { path: 'reports', component: ReportComponent, outlet: "master", },
+    path: '', component: LayoutComponent, children: [
+      { path: 'home', component: HomeComponent, },
+      {
+        path: 'cadastro', loadChildren: () =>
+          import('./cadastro/cadastro.module').then(m => m.CadastroModule),
+        // canLoad: [AuthGuard],
+        data: { expectedRole: Role.Admin }
+      },
+      { path: 'user', component: UserComponent, },
+      { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'apontamento', component: ApontamentoComponent, },
+      { path: 'reports', component: ReportComponent, },
 
     ]
-    // , canLoad: [AuthGuard]
+    // , canActivate: [AuthGuard]
   },
   {
     path: '', component: LoginLayoutComponent, children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'login/:redirectUrl', component: LoginComponent },
+      { path: 'login', component: LoginComponent, },
+      // { path: 'login/:redirectUrl', component: LoginComponent, outlet: 'login-router' },
     ]
   },
 
-  { path: '**', component: PageNotFoundComponent }
-
+  { path: '**', component: PageNotFoundComponent },
+  // {
+  //   path: '',
+  //   redirectTo: '/home',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

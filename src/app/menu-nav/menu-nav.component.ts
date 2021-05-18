@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { User } from '../auth/auth.service';
+import { User } from '../user/user';
 
 @Component({
   selector: 'app-menu-nav',
