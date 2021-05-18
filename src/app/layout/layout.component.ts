@@ -32,6 +32,10 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (this.authService.user$ === undefined) {
+      this.authService.signOut();
+    }
+
     this.authService.user$
       .subscribe(user => {
         this.user = user;

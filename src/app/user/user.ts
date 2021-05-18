@@ -63,4 +63,18 @@ export class User implements IUser {
       user.phones
     );
   }
+
+  static createUser(user: any) {
+    return new User(
+      user.uid,
+      user.email,
+      user?.name,
+      user?.picture,
+      user?.role,
+      user?.dateOfBirth,
+      Status.ACTIVE,
+      user?.address,
+      user?.phones
+    );
+  }
 }

@@ -1,58 +1,43 @@
 import { Injectable } from '@angular/core';
 import { User, IUser } from './user';
 import { CacheService } from '../auth/cache.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { IAuthStatus, AuthService } from '../auth/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { transformError } from '../common/common';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends CacheService {
-  currentUser = new BehaviorSubject<IUser>(this.getItem('user') || new User());
-  private currentAuthStatus: IAuthStatus;
-  constructor(private httpClient: HttpClient, private authService: AuthService) {
+
+
+  constructor(private angularFirestore: AngularFirestore, private angularFirebaseAuth: AngularFireAuth,) {
     super();
-    this.currentUser.subscribe(user => this.setItem('user', user));
-    this.authService.authStatus.subscribe(
-      authStatus => (this.currentAuthStatus = authStatus)
-    );
+
   }
 
-  getCurrentUser(): Observable<IUser> {
-    const userObservable = this.getUser(this.currentAuthStatus.userId).pipe(
-      catchError(transformError)
-    );
-    userObservable.subscribe(
-      user => this.currentUser.next(user),
-      err => Observable.throw(err);
-    );
-    return userObservable;
+  getUser(uid) {
+    return this.angularFirestore.collection<User>('users', q => q.where('uid', '==', uid)).get();
   }
 
-  getUser(id): Observable<IUser> {
-    return this.httpClient.get<IUser>(`${environment.baseUrl}/v1/user/${id}`);
+  update(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(`users/${user.uid}`);
+    userRef.set(JSON.parse(JSON.stringify(user)), { merge: true });
   }
 
-  updateUser(user: IUser): Observable<IUser> {
-    this.setItem('draft-user', user); // cache user data in case of errors
-    const updateResponse = this.httpClient
-      .put<IUser>(`${environment.baseUrl}/v1/user/${user.id || 0}`, user)
-      .pipe(catchError(transformError));
+  add(user: User) {
 
-    updateResponse.subscribe(
-      res => {
-        this.currentUser.next(res);
-        this.removeItem('draft-user');
-      },
-      err => Observable.throw(err);
-    );
-
-    return updateResponse;
+    this.angularFirebaseAuth.createUserWithEmailAndPassword(user.email, 'oportuna')
+      .then((result) => {
+        user.uid = result.user.uid;
+        this.angularFirestore.collection('users').add(user);
+        result.user.sendEmailVerification();
+      }
+      ).catch(
+        (err) => {
+          console.log(err);
+        }
+      );
   }
-
-
 }

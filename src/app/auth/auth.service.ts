@@ -36,8 +36,6 @@ export class AuthService extends CacheService {
       .then((result) => {
         console.log(`bem vindo ${result}`);
         console.log(result);
-        this.updateUserData(result.user);
-
         this.user$ = this.angularFirebaseAuth.authState.pipe(
           switchMap(user => {
             // Logged in
@@ -59,19 +57,25 @@ export class AuthService extends CacheService {
 
   updateUserData(user) {
     // Sets user data to firestore on login
-    let data: User;
+    // let data: User;
     const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(`users/${user.uid}`);
 
-    data.uid = user.uid;
-    data.email = user.email;
+    console.log(user);
+    console.log('userref');
+    console.log(userRef.get());
+
+    const data = User.createUser({
+      uid: user.uid,
+      email: user.email
+    });
 
 
-    return userRef.set(data, { merge: true });
+    return userRef.set(JSON.parse(JSON.stringify(data)), { merge: true });
 
   }
   signOut() {
     this.angularFirebaseAuth.signOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
 }

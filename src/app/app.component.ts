@@ -3,7 +3,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { combineLatest } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
-import { AuthService, User } from './auth/auth.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
