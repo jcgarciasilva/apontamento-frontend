@@ -33,6 +33,9 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.authService.user$ === undefined) {
+      console.log(`logging out`);
+      console.log(this.authService.user$);
+      console.log(this.authService.isLoggedIn$);
       this.authService.signOut();
     }
 

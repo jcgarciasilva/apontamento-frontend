@@ -7,6 +7,7 @@ export enum Status {
 export interface IUser {
   uid: string;
   email: string;
+  login: string;
   name: {
     first: string
     last: string
@@ -35,6 +36,7 @@ export class User implements IUser {
   constructor(
     public uid = '',
     public email = '',
+    public login,
     public name = { first: '', last: '' },
     public picture = '',
     public role = Role.None,
@@ -54,6 +56,7 @@ export class User implements IUser {
     return new User(
       user.uid,
       user.email,
+      user.login,
       user.name,
       user.picture,
       user.role,

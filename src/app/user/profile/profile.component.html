@@ -1,3 +1,12 @@
-<p>
-  profile works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <img *ngIf="user.picture" />
+    <span *ngIf="!user.picture" class="material-icons-outlined">
+person_outline
+</span>
+  </mat-card-header>
+
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card>

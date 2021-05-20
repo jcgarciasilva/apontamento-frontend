@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { sign } from 'fake-jwt-sign';
@@ -15,16 +15,27 @@ import { User } from '../user/user';
 // import { CacheService } from './cache.service';
 
 @Injectable()
-export class AuthService extends CacheService {
-
-  constructor(private angularFirebaseAuth: AngularFireAuth, private router: Router, private angularFirestore: AngularFirestore,) {
-    super();
-  }
-
+export class AuthService {
 
   user$: Observable<User>;
+  isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  async;
+  constructor(private angularFirebaseAuth: AngularFireAuth,
+    private router: Router,
+    private angularFirestore: AngularFirestore) {
+
+    this.angularFirebaseAuth.authState.subscribe(authUser => {
+      if (authUser) {
+        this.isLoggedIn$.next(true);
+        this.user$ = this.angularFirestore.doc<User>(`users/${authUser.uid}`).valueChanges();
+      } else {
+        console.log('Error for authUser');
+        console.log(authUser);
+        this.isLoggedIn$.next(true);
+      }
+    });
+
+  }
 
   getUser() {
     return this.angularFirebaseAuth.authState;
@@ -32,44 +43,42 @@ export class AuthService extends CacheService {
 
 
   login(email: string, password: string) {
-    return this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(`bem vindo ${result}`);
-        console.log(result);
-        this.user$ = this.angularFirebaseAuth.authState.pipe(
-          switchMap(user => {
-            // Logged in
-            if (user) {
-              console.log(user);
-              this.updateUserData(user);
-              return this.angularFirestore.doc<User>(`users/${user.uid}`).valueChanges();
-            } else {
-              // Logged out
-              return of(null);
-            }
-          }));
-        this.router.navigate(['/home']);
-      }
-      ).catch((error) => {
-        window.alert(error.message);
-      });
+    return this.angularFirebaseAuth.setPersistence('local').then(_ => {
+      return this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
+        .then((result) => {
+          console.log(`bem vindo ${result}`);
+          console.log(result);
+          this.user$ = this.angularFirebaseAuth.authState.pipe(
+            switchMap(user => {
+              // Logged in
+              if (user) {
+                console.log(user);
+                this.updateUserData(user);
+                this.isLoggedIn$.next(true);
+                return this.angularFirestore.doc<User>(`users/${user.uid}`).valueChanges();
+              } else {
+                // Logged out
+                this.isLoggedIn$.next(false);
+                return of(null);
+              }
+            }));
+          this.router.navigate(['/home']);
+          ;
+        })
+    }).catch((error) => {
+      window.alert(error.message);
+    });
   }
 
   updateUserData(user) {
-    // Sets user data to firestore on login
+    // Sets ser data to firestore on login
     // let data: User;
     const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(`users/${user.uid}`);
-
-    console.log(user);
-    console.log('userref');
-    console.log(userRef.get());
 
     const data = User.createUser({
       uid: user.uid,
       email: user.email
     });
-
-
     return userRef.set(JSON.parse(JSON.stringify(data)), { merge: true });
 
   }

@@ -24,7 +24,7 @@ const routes: Routes = [
         data: { expectedRole: Role.Admin }
       },
       { path: 'user', component: UserComponent, },
-      { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
+      { path: 'user/profile', component: ProfileComponent, },
       { path: 'apontamento', component: ApontamentoComponent, },
       { path: 'reports', component: ReportComponent, },
 

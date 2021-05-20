@@ -1,3 +1,4 @@
+import { UiService } from './../common/ui.service';
 import { Injectable } from '@angular/core';
 import { User, IUser } from './user';
 import { CacheService } from '../auth/cache.service';
@@ -13,7 +14,7 @@ import { unescapeIdentifier } from '@angular/compiler';
 export class UserService {
 
 
-  constructor(private angularFirestore: AngularFirestore, private angularFirebaseAuth: AngularFireAuth,) { }
+  constructor(private angularFirestore: AngularFirestore, private angularFirebaseAuth: AngularFireAuth, private uiService: UiService) { }
 
   getUser(uid: string) {
     return this.angularFirestore.collection<User>('users').doc(uid).get();
@@ -35,6 +36,7 @@ export class UserService {
       ).catch(
         (err) => {
           console.log(err);
+          this.uiService.showToast(err);
         }
       );
   }

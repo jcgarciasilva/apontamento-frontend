@@ -1,3 +1,4 @@
+import { ProfileComponent } from './user/profile/profile.component';
 import { LoginLayoutComponent } from './login/login-layout.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -53,6 +54,7 @@ const firebaseConfig = {
     LoginComponent,
     SimpleDialogComponent,
     LayoutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
