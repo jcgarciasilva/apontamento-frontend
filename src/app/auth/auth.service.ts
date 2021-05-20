@@ -2,16 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { sign } from 'fake-jwt-sign';
-import * as decode from 'jwt-decode';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { transformError } from '../common/common';
-import { CacheService } from './cache.service';
 import { Role } from './role.enum';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../user/user';
+import * as firebase from 'firebase';
 // import { CacheService } from './cache.service';
 
 @Injectable()
@@ -23,17 +19,33 @@ export class AuthService {
   constructor(private angularFirebaseAuth: AngularFireAuth,
     private router: Router,
     private angularFirestore: AngularFirestore) {
+    console.log('qual é user:');
+    console.log(this.angularFirebaseAuth.currentUser);
 
-    this.angularFirebaseAuth.authState.subscribe(authUser => {
+
+
+    // this.angularFirebaseAuth.authState.subscribe(authUser => {
+    //   if (authUser) {
+    //     this.isLoggedIn$.next(true);
+    //     this.user$ = this.angularFirestore.doc<User>(`users/${authUser.uid}`).valueChanges();
+    //   } else {
+    //     console.log('Error for authUser');
+    //     console.log(authUser);
+    //     this.isLoggedIn$.next(false);
+    //   }
+    // });
+
+    this.angularFirebaseAuth.onAuthStateChanged(authUser => {
       if (authUser) {
         this.isLoggedIn$.next(true);
         this.user$ = this.angularFirestore.doc<User>(`users/${authUser.uid}`).valueChanges();
       } else {
         console.log('Error for authUser');
         console.log(authUser);
-        this.isLoggedIn$.next(true);
+        this.isLoggedIn$.next(false);
       }
     });
+
 
   }
 
@@ -63,8 +75,7 @@ export class AuthService {
               }
             }));
           this.router.navigate(['/home']);
-          ;
-        })
+        });
     }).catch((error) => {
       window.alert(error.message);
     });

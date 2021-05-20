@@ -23,6 +23,8 @@ export class LayoutComponent implements OnInit {
   isOpen: boolean;
   _displayMenu = false;
 
+  isLogged: boolean;
+
   user: User;
 
   constructor(
@@ -32,17 +34,26 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.authService.user$ === undefined) {
+    this.authService.isLoggedIn$.asObservable()
+      .subscribe((isConnect) => this.isLogged = isConnect);
+    console.log(`Conectado: ${this.isLogged}`);
+
+    this.authService.getUser().subscribe(user => {
+      console.log('user autenticado aqui -----');
+      console.log(user);
+    });
+
+    if (!this.isLogged) {
       console.log(`logging out`);
       console.log(this.authService.user$);
       console.log(this.authService.isLoggedIn$);
       this.authService.signOut();
     }
 
-    this.authService.user$
-      .subscribe(user => {
-        this.user = user;
-      });
+    // this.authService.user$
+    //   .subscribe(user => {
+    //     this.user = user;
+    //   });
 
     this.subs.sink = combineLatest([
       this.media.asObservable(),
