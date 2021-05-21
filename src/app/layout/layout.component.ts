@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
 import { AuthService } from '../auth/auth.service';
@@ -34,26 +34,12 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.authService.isLoggedIn$.asObservable()
-      .subscribe((isConnect) => this.isLogged = isConnect);
-    console.log(`Conectado: ${this.isLogged}`);
-
-    this.authService.getUser().subscribe(user => {
-      console.log('user autenticado aqui -----');
-      console.log(user);
+    this.authService.user$.asObservable().subscribe(user => {
+      this.user = user;
     });
 
-    if (!this.isLogged) {
-      console.log(`logging out`);
-      console.log(this.authService.user$);
-      console.log(this.authService.isLoggedIn$);
-      this.authService.signOut();
-    }
-
-    // this.authService.user$
-    //   .subscribe(user => {
-    //     this.user = user;
-    //   });
+    this.authService.isLoggedIn$.asObservable()
+      .subscribe((isConnect) => this.isLogged = isConnect);
 
     this.subs.sink = combineLatest([
       this.media.asObservable(),

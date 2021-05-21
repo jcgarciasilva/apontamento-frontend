@@ -1,19 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Role } from './role.enum';
-import { switchMap } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../user/user';
-import * as firebase from 'firebase';
 // import { CacheService } from './cache.service';
 
 @Injectable()
 export class AuthService {
 
-  user$: Observable<User>;
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private angularFirebaseAuth: AngularFireAuth,
@@ -21,6 +18,8 @@ export class AuthService {
     private angularFirestore: AngularFirestore) {
     console.log('qual é user:');
     console.log(this.angularFirebaseAuth.currentUser);
+
+    this.angularFirebaseAuth.setPersistence('local');
 
 
 
@@ -35,18 +34,20 @@ export class AuthService {
     //   }
     // });
 
-    this.angularFirebaseAuth.onAuthStateChanged(authUser => {
+    this.angularFirebaseAuth.authState.subscribe(authUser => {
       if (authUser) {
+        console.log('entrou no observable .....');
         this.isLoggedIn$.next(true);
-        this.user$ = this.angularFirestore.doc<User>(`users/${authUser.uid}`).valueChanges();
+
+        this.angularFirestore.collection<User>('users').doc(authUser.uid)
+          .get().subscribe(user => this.user$.next(user.data()));
       } else {
         console.log('Error for authUser');
-        console.log(authUser);
         this.isLoggedIn$.next(false);
+        this.user$.next(null);
+        this.signOut();
       }
     });
-
-
   }
 
   getUser() {
@@ -55,30 +56,24 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    return this.angularFirebaseAuth.setPersistence('local').then(_ => {
-      return this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
-        .then((result) => {
-          console.log(`bem vindo ${result}`);
-          console.log(result);
-          this.user$ = this.angularFirebaseAuth.authState.pipe(
-            switchMap(user => {
-              // Logged in
-              if (user) {
-                console.log(user);
-                this.updateUserData(user);
-                this.isLoggedIn$.next(true);
-                return this.angularFirestore.doc<User>(`users/${user.uid}`).valueChanges();
-              } else {
-                // Logged out
-                this.isLoggedIn$.next(false);
-                return of(null);
-              }
-            }));
-          this.router.navigate(['/home']);
-        });
-    }).catch((error) => {
-      window.alert(error.message);
-    });
+    this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log(`bem vindo ${result}`);
+        console.log(result);
+
+        this.isLoggedIn$.next(true);
+
+        this.angularFirestore.doc<User>(`users/${result.user.uid}`)
+          .valueChanges()
+          .subscribe(authUser => {
+            this.updateUserData(authUser);
+            this.user$.next(authUser);
+          });
+        this.router.navigate(['/home']);
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+    // });
   }
 
   updateUserData(user) {
@@ -93,6 +88,7 @@ export class AuthService {
     return userRef.set(JSON.parse(JSON.stringify(data)), { merge: true });
 
   }
+
   signOut() {
     this.angularFirebaseAuth.signOut();
     this.router.navigate(['/login']);
