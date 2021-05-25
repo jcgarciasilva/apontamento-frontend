@@ -1,0 +1,17 @@
+#user-form .mat-form-field-prefix {
+    margin-right: 10px;
+}
+
+#user-form .mat-form-field-suffix {
+    margin-left: 10px;
+}
+
+.profile-card{
+  width: 80%;
+}
+
+.profile-user-img {
+   width: "30%";
+  height: "30%";
+    border-radius: 50%!important;
+}

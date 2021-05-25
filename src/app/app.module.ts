@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +29,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ReportComponent } from './report/report.component';
 import { UserComponent } from './user/user.component';
 import { LayoutComponent } from './layout/layout.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBkG4RIlpWthe63BiVrfLmItfKD5ginmR0',
@@ -54,13 +62,15 @@ const firebaseConfig = {
     LoginComponent,
     SimpleDialogComponent,
     LayoutComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     AngularFirestoreModule,
+    MatDatepickerModule,
     HttpClientModule,
     AppRoutingModule,
     MaterialModule,
@@ -70,6 +80,11 @@ const firebaseConfig = {
     CadastroModule,
     ReactiveFormsModule,
     LayoutModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
   ],
   providers: [
     UiService,
@@ -79,6 +94,7 @@ const firebaseConfig = {
       multi: true
     },
     AuthGuard,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],
   bootstrap: [
     AppComponent

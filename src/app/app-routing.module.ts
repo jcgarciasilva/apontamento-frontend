@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
+import { AngularFireAuthGuard, loggedIn } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { ApontamentoComponent } from './apontamento/apontamento.component';
-import { AuthGuard } from './auth/auth-guard.service';
 import { Role } from './auth/role.enum';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { LoginLayoutComponent } from './login/login-layout.component';
+import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReportComponent } from './report/report.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UserComponent } from './user/user.component';
-import { LoginLayoutComponent } from './login/login-layout.component';
 
 
 const routes: Routes = [
@@ -21,15 +21,15 @@ const routes: Routes = [
         path: 'cadastro', loadChildren: () =>
           import('./cadastro/cadastro.module').then(m => m.CadastroModule),
         // canLoad: [AuthGuard],
-        data: { expectedRole: Role.Admin }
+        data: { expectedRole: Role.ADMIN }
       },
       { path: 'user', component: UserComponent, },
-      { path: 'user/profile', component: ProfileComponent, },
+      { path: 'user/profile/:uid', component: ProfileComponent, },
       { path: 'apontamento', component: ApontamentoComponent, },
       { path: 'reports', component: ReportComponent, },
 
     ]
-    // , canActivate: [AuthGuard]
+    // , canActivate: [AngularFireAuthGuard], data: { authGuardPipe: loggedIn }
   },
   {
     path: '', component: LoginLayoutComponent, children: [
@@ -38,12 +38,13 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
   { path: '**', component: PageNotFoundComponent },
-  // {
-  //   path: '',
-  //   redirectTo: '/home',
-  //   pathMatch: 'full'
-  // }
+
 ];
 
 @NgModule({

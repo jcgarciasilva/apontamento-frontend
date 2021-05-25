@@ -1,7 +1,7 @@
 export enum Role {
-  None = 'none',
-  Visualiza = 'visualiza',
-  Atualiza = 'atualiza',
-  Admin = 'admin',
+  NONE = 'NONE',
+  DEVELOPER = 'DEVELOPER',
+  CUSTOMER = 'CUSTOMER',
+  ADMIN = 'ADMIN',
 
 }

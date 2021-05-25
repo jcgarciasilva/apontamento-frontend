@@ -20,16 +20,19 @@
     "source.fixAll.tslint": false
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[html]": {
-    "editor.defaultFormatter": "hookyqr.beautify"
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+},
   "prettier.printWidth": 90,                 // Following setting requires Prettier Extension
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
   "typescriptHero.imports.insertSemicolons": false, // Following setting requires TypeScriptHero Extension
   "typescriptHero.imports.multiLineWrapThreshold": 90,
-  "npm.enableScriptExplorer": true,
   // Configures if the built-in HTML language suggests Angular V1 tags and properties.
   "html.suggest.angular1": true,
   // Configures if the built-in HTML language suggests Ionic tags, properties and values.

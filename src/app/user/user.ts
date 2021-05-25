@@ -4,14 +4,17 @@ export enum Status {
   ACTIVE,
   INACTIVE
 }
+
+export enum Genre {
+  MALE,
+  FEMALE
+}
+
 export interface IUser {
   uid: string;
   email: string;
   login: string;
-  name: {
-    first: string
-    last: string
-  };
+  name: string;
   picture: string;
   role: Role;
   userStatus: Status;
@@ -24,6 +27,7 @@ export interface IUser {
     zip: string
   };
   phones: IPhone[];
+  genre: Genre;
 }
 
 export interface IPhone {
@@ -37,9 +41,9 @@ export class User implements IUser {
     public uid = '',
     public email = '',
     public login,
-    public name = { first: '', last: '' },
+    public name = '',
     public picture = '',
-    public role = Role.None,
+    public role = Role.DEVELOPER,
     public dateOfBirth = null,
     public userStatus = Status.ACTIVE,
     public address = {
@@ -49,7 +53,8 @@ export class User implements IUser {
       state: '',
       zip: '',
     },
-    public phones = []
+    public phones = [],
+    public genre = null,
   ) { }
 
   static BuildUser(user: IUser) {
@@ -69,8 +74,8 @@ export class User implements IUser {
 
   static createUser(user: any) {
     return new User(
-      user.uid,
-      user.email,
+      user?.uid,
+      user?.email,
       user?.name,
       user?.picture,
       user?.role,

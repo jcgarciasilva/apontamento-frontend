@@ -16,23 +16,8 @@ export class AuthService {
   constructor(private angularFirebaseAuth: AngularFireAuth,
     private router: Router,
     private angularFirestore: AngularFirestore) {
-    console.log('qual é user:');
-    console.log(this.angularFirebaseAuth.currentUser);
 
     this.angularFirebaseAuth.setPersistence('local');
-
-
-
-    // this.angularFirebaseAuth.authState.subscribe(authUser => {
-    //   if (authUser) {
-    //     this.isLoggedIn$.next(true);
-    //     this.user$ = this.angularFirestore.doc<User>(`users/${authUser.uid}`).valueChanges();
-    //   } else {
-    //     console.log('Error for authUser');
-    //     console.log(authUser);
-    //     this.isLoggedIn$.next(false);
-    //   }
-    // });
 
     this.angularFirebaseAuth.authState.subscribe(authUser => {
       if (authUser) {
@@ -66,7 +51,7 @@ export class AuthService {
         this.angularFirestore.doc<User>(`users/${result.user.uid}`)
           .valueChanges()
           .subscribe(authUser => {
-            this.updateUserData(authUser);
+            //this.updateUserData(authUser);
             this.user$.next(authUser);
           });
         this.router.navigate(['/home']);

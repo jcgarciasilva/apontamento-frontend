@@ -39,19 +39,17 @@ export class LoginComponent implements OnInit {
 
   login(submittedForm: FormGroup) {
     this.authService
-      .login(submittedForm.value.userName, submittedForm.value.password)
+      .login(submittedForm.value.userName, submittedForm.value.password);
   }
 
   homeRoutePerRole(role: Role) {
     switch (role) {
-      case Role.Admin:
+      case Role.ADMIN:
         return '/home';
-      case Role.Atualiza:
+      case Role.DEVELOPER:
         return '/apontamentos';
-      case Role.Visualiza:
-        return '/apontamntos';
       default:
-        return '/users';
+        return '/home';
     }
   }
 
