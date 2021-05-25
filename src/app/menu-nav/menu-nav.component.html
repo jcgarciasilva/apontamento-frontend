@@ -1,38 +1,45 @@
-<div class="root-content" *ngIf="user">
-<mat-toolbar color="primary" >
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        *ngIf="isHandset$"
-        >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Apontamento</span>
+<div class="root-content" fxFill *ngIf="user">
+  <mat-toolbar color="primary">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button *ngIf="isHandset$">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span>Apontamento</span>
     <span class="flex-spacer"></span>
     {{user.email}}
-    <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_circle</mat-icon></button>
-    </mat-toolbar>
-    <mat-menu #appMenu="matMenu">
-      <button mat-menu-item>Settings</button>
-      <button mat-menu-item>Logout</button>
-    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-menu #appMenu="matMenu">
+    <a [routerLink]="['/user/profile/', user.uid]" routerLinkActive="router-link-active" mat-menu-item>Profile</a>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
 
-<mat-sidenav-container class="sidenav-container" >
+  <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" color="accent" >
-    <mat-nav-list color="accent">
-      <a mat-list-item routerLink="/home" outerLinkActive="active-link"> <mat-icon>home</mat-icon> <span> Home</span></a>
-      <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link"><mat-icon>access_time</mat-icon> <span> Apontamentos</span></a>
-      <a mat-list-item routerLink="/reports" outerLinkActive="active-link"> <mat-icon>dashboard</mat-icon> <span>Relatórios</span></a>
-      <a mat-list-item routerLink="/cadastro" outerLinkActive="active-link"><mat-icon>assignment</mat-icon> <span>Cadastros</span></a>
-      <a mat-list-item routerLink="/user" outerLinkActive="active-link"><mat-icon>people_alt</mat-icon> <span> Usuários</span></a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="page-content">
-    <ng-content></ng-content>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <mat-sidenav #drawer mode="side" [(opened)]="opened" class="sidenav" color="accent">
+      <mat-nav-list color="accent">
+        <a mat-list-item routerLink="/home" outerLinkActive="active-link">
+          <mat-icon>home</mat-icon> <span> Home</span>
+        </a>
+        <a mat-list-item routerLink="/apontamento" outerLinkActive="active-link">
+          <mat-icon>access_time</mat-icon> <span> Apontamentos</span>
+        </a>
+        <a mat-list-item routerLink="/reports" outerLinkActive="active-link">
+          <mat-icon>dashboard</mat-icon> <span>Relatórios</span>
+        </a>
+        <a mat-list-item routerLink="/cadastro" outerLinkActive="active-link">
+          <mat-icon>assignment</mat-icon> <span>Cadastros</span>
+        </a>
+        <a mat-list-item routerLink="/user" outerLinkActive="active-link">
+          <mat-icon>people_alt</mat-icon> <span> Usuários</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlex>
+      <div class="page-content">
+        <ng-content></ng-content>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

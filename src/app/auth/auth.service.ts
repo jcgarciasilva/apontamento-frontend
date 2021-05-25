@@ -12,6 +12,7 @@ export class AuthService {
 
   user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  userUID: string = '';
 
   constructor(private angularFirebaseAuth: AngularFireAuth,
     private router: Router,
@@ -23,7 +24,7 @@ export class AuthService {
       if (authUser) {
         console.log('entrou no observable .....');
         this.isLoggedIn$.next(true);
-
+        this.userUID = authUser.uid;
         this.angularFirestore.collection<User>('users').doc(authUser.uid)
           .get().subscribe(user => this.user$.next(user.data()));
       } else {

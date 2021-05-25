@@ -26,26 +26,41 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(
       (params) => {
         this.userId = params.get('uid');
-        if (!this.userId) {
-          this.auth.user$.subscribe(user => this.user = user);
+        if (this.userId == this.auth.userUID) {
+          this.auth.user$.subscribe(user => {
+            this.user = user; this.buildForm();
+          },
+            () => console.log('Errrro'));
+          console.log('else')
+          console.log(this.user)
         }
         else {
-          this.userService.getUser(this.userId).subscribe(user => this.user = user.data());
+          this.userService.getUser(this.userId)
+            .subscribe(user => {
+              this.user = user.data(); this.buildForm(); console.log(this.user)
+            },
+              error => console.error(error));
         }
 
-        this.buildForm();
+
       }
     );
     this.buildForm();
   }
 
   buildForm() {
+    console.log(this.user)
     this.profileForm = this.formBuilder.group({
-      email: [this.user.email, [Validators.required,
+      email: [this.user?.email, [Validators.required,
       Validators.email]],
-      name: [this.user.name, [Validators.required, Validators.min(5)]],
-      birthday: [this.user.dateOfBirth, []],
-      role: [this.user.role, [Validators.required,],]
+      name: [this.user?.name, [Validators.required, Validators.min(5)]],
+      birthday: [this.user?.dateOfBirth, []],
+      role: [this.user?.role, [Validators.required,],],
+      address: [this.user?.address?.line1, []],
+      city: [this.user?.address?.city, []],
+      state: [this.user?.address?.state, []],
+      postalCode: [this.user?.address?.zip, []],
+
     });
   }
 

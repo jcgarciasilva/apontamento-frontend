@@ -1,5 +1,4 @@
-<form [formGroup]="profileForm" id="user-form" fxLayout="row" fxLayoutGap="25px" fxFlex="60%"
-  fxLayoutAlign="center center" fxFlexAlign="center">
+<form [formGroup]="profileForm" id="user-form" fxLayout="row" fxLayoutAlign="center center" fxFlexAlign="center">
   <mat-card class="profile-card">
     <mat-card-header>
       <div fxFlex fxLayout="column" fxLayoutAlign="center center">
@@ -73,7 +72,7 @@
           <input matInput placeholder="Cidade" formControlName="city">
         </mat-form-field>
         <mat-form-field fxFlex="10%" fxLayoutGap>
-          <input matInput placeholder="Estado" formControlName="city">
+          <input matInput placeholder="Estado" formControlName="state">
         </mat-form-field>
         <mat-form-field fxFlex="40%" fxLayoutGap>
           <input matInput #postalCode maxlength="5" placeholder="CEP" formControlName="postalCode">
