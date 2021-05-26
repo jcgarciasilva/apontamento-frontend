@@ -44,36 +44,19 @@ export class AuthService {
   login(email: string, password: string) {
     this.angularFirebaseAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(`bem vindo ${result}`);
-        console.log(result);
-
         this.isLoggedIn$.next(true);
 
         this.angularFirestore.doc<User>(`users/${result.user.uid}`)
           .valueChanges()
           .subscribe(authUser => {
-            //this.updateUserData(authUser);
             this.user$.next(authUser);
           });
         this.router.navigate(['/home']);
       }).catch((error) => {
         window.alert(error.message);
       });
-    // });
   }
 
-  updateUserData(user) {
-    // Sets ser data to firestore on login
-    // let data: User;
-    const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(`users/${user.uid}`);
-
-    const data = User.createUser({
-      uid: user.uid,
-      email: user.email
-    });
-    return userRef.set(JSON.parse(JSON.stringify(data)), { merge: true });
-
-  }
 
   signOut() {
     this.angularFirebaseAuth.signOut();

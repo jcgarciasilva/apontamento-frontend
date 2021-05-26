@@ -1,12 +1,9 @@
 import { UiService } from './../common/ui.service';
 import { Injectable } from '@angular/core';
 import { User, IUser } from './user';
-import { CacheService } from '../auth/cache.service';
-import { catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { unescapeIdentifier } from '@angular/compiler';
+// import * as fbAdmin from 'firebase-admin';
 
 @Injectable({
   providedIn: 'root'
@@ -22,22 +19,29 @@ export class UserService {
 
   update(user: User) {
     const userRef = this.angularFirestore.collection<User>('users').doc(user.uid);
-    userRef.set(JSON.parse(JSON.stringify(user)), { merge: true });
+    userRef.set(JSON.parse(JSON.stringify(user)), { merge: true }).then(data => this.uiService.showToast('Dados salvos com sucesso'))
+      .catch(error => this.uiService.showToast(error));
   }
 
   add(user: User) {
 
-    this.angularFirebaseAuth.createUserWithEmailAndPassword(user.email, 'oportuna')
-      .then((result) => {
-        user.uid = result.user.uid;
-        this.angularFirestore.collection('users').doc(result.user.uid).set(user);
-        result.user.sendEmailVerification();
-      }
-      ).catch(
-        (err) => {
-          console.log(err);
-          this.uiService.showToast(err);
-        }
-      );
+    // fbAdmin.auth().createUser({
+    //   email: user.email,
+    //   password: 'Oportuna2014'
+    // }).then((result) => {
+    //   user.uid = result.uid;
+    //   console.log(result);
+    //   console.log(user);
+    //   this.angularFirestore.collection('users').doc(user.uid).set(JSON.parse(JSON.stringify(user))).then(() => {
+    //     this.angularFirebaseAuth.sendSignInLinkToEmail(user.email, null)
+    //       .catch(error => this.uiService.showToast(error));
+    //     this.uiService.showToast('Dados salvos com sucesso');
+    //   }).catch(error => this.uiService.showToast(error));
+    // }).catch(
+    //   (err) => {
+    //     console.error(err);
+    //     this.uiService.showToast(err);
+    //   }
+    // );
   }
 }

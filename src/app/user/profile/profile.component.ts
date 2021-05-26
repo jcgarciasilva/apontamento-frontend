@@ -1,6 +1,7 @@
+import { UiService } from 'src/app/common/ui.service';
 import { UserService } from './../user.service';
 import { AuthService } from './../../auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,9 +13,9 @@ import { Role } from 'src/app/auth/role.enum';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
-  user: User = User.createUser({});
+  userToModify: User = User.createUser({});
   profileForm: FormGroup;
   userId: string;
   rolesList: Role[] = [Role.ADMIN, Role.DEVELOPER];
@@ -22,46 +23,68 @@ export class ProfileComponent implements OnInit {
   constructor(private auth: AuthService, private userService: UserService,
     private formBuilder: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { }
 
+  ngOnDestroy(): void {
+  }
+
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(
       (params) => {
         this.userId = params.get('uid');
-        if (this.userId == this.auth.userUID) {
+        if (this.userId === this.auth.userUID) {
           this.auth.user$.subscribe(user => {
-            this.user = user; this.buildForm();
+            this.userToModify = user; this.buildForm();
           },
             () => console.log('Errrro'));
-          console.log('else')
-          console.log(this.user)
         }
         else {
           this.userService.getUser(this.userId)
             .subscribe(user => {
-              this.user = user.data(); this.buildForm(); console.log(this.user)
+              this.userToModify = user.data();
+              this.buildForm();
             },
-              error => console.error(error));
+              error => console.log(error));
         }
-
-
       }
     );
     this.buildForm();
   }
 
   buildForm() {
-    console.log(this.user)
+    console.log(this.userToModify)
     this.profileForm = this.formBuilder.group({
-      email: [this.user?.email, [Validators.required,
+      email: [{
+        value: this.userToModify?.email, disabled: this.userToModify?.email
+      }, [Validators.required,
       Validators.email]],
-      name: [this.user?.name, [Validators.required, Validators.min(5)]],
-      birthday: [this.user?.dateOfBirth, []],
-      role: [this.user?.role, [Validators.required,],],
-      address: [this.user?.address?.line1, []],
-      city: [this.user?.address?.city, []],
-      state: [this.user?.address?.state, []],
-      postalCode: [this.user?.address?.zip, []],
+      name: [this.userToModify?.name, [Validators.required, Validators.min(5)]],
+      birthday: [this.userToModify?.dateOfBirth, []],
+      role: [this.userToModify?.role, [Validators.required,],],
+      address: [this.userToModify?.address?.line1, []],
+      city: [this.userToModify?.address?.city, []],
+      state: [this.userToModify?.address?.state, []],
+      postalCode: [this.userToModify?.address?.zip, []],
 
     });
+  }
+
+  save() {
+
+    this.userToModify.email = this.profileForm.get('email').value;
+    this.userToModify.name = this.profileForm.get('name').value;
+    this.userToModify.dateOfBirth = new Date(this.profileForm.get('birthday').value);
+    this.userToModify.role = this.profileForm.get('role').value;
+    this.userToModify.address.line1 = this.profileForm.get('address').value;
+    this.userToModify.address.city = this.profileForm.get('city').value;
+    this.userToModify.address.state = this.profileForm.get('state').value;
+    this.userToModify.address.zip = this.profileForm.get('postalCode').value;
+
+    if (this.userToModify.uid === '' || this.userToModify.uid === undefined) {
+      this.userService.add(this.userToModify);
+    }
+    else {
+      this.userService.update(this.userToModify);
+    }
+
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="root-content" fxFill *ngIf="user">
   <mat-toolbar color="primary">
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button *ngIf="isHandset$">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <button type="button" aria-label="Abrir menu" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$">
+      <mat-icon aria-label="Menu">menu</mat-icon>
     </button>
     <span>Apontamento</span>
     <span class="flex-spacer"></span>
